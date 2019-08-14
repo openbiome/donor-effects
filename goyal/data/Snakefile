@@ -1,0 +1,177 @@
+import pandas as pd
+import requests, hashlib, wget
+from pathlib import Path
+
+configfile: "config.yaml"
+
+# Download the file report if it's not here
+if not Path(config["filereport"]).exists():
+    print("Downloading filereport...")
+    wget.download(f"https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession={config['study_accession']}&result=read_run", config["filereport"])
+
+def regex_filter(x):
+    if x:
+        return re.search(config["sample_regex"], x) is not None
+    else:
+        return False
+
+# Load the metadata in the file report
+filereport = pd.read_csv(config["filereport"], sep="\t")
+samples = (filereport[filereport["library_name"].apply(regex_filter)]
+    .assign(url=lambda df: ["ftp://" + x for x in df.fastq_ftp])
+    .assign(filepath=lambda df: [f"fastq/{x}.fastq.gz" for x in df.run_accession])
+    .assign(absolute_filepath=lambda df: ["$PWD/" + x for x in df.filepath])
+)
+
+def download_and_validate(url, filepath, md5):
+    if not Path(filepath).exists():
+        wget.download(url, filepath)
+
+    with open(filepath, "rb") as f:
+        observed_md5 = hashlib.md5(f.read()).hexdigest()
+        if not observed_md5 == md5:
+            raise RuntimeError(f"Downloaded file {filepath} from url {url} has MD5 {observed_md5}, which does not match file manifest's expected MD5 {md5}")
+
+def minimum_depth(fn):
+    '''Get minimum number of counts in OTU table across samples'''
+    return int(pd.read_csv(fn, sep="\t", header=1).drop("#OTU ID", axis=1).apply(sum, axis=0).min())
+
+# Rules ---------------------------------------------------------------
+
+rule export_diversity:
+    output:
+        "alpha-diversity.tsv"
+    input:
+        config["alpha-diversity"]
+    shell:
+        "qiime tools export --input-path {input} --output-path ."
+
+rule alpha_diversity:
+    output:
+        config["alpha-diversity"]
+    input:
+        config["rarefied-table"]
+    params:
+        metric = config["alpha-diversity-metric"]
+    shell:
+        "qiime diversity alpha"
+        " --i-table {input}"
+        " --p-metric {params.metric}"
+        " --o-alpha-diversity {output}"
+
+rule rarefy:
+    output:
+        config["rarefied-table"]
+    input:
+        config["table"]
+    params:
+        depth = open(config["rarefaction-depth"]).read()
+    shell:
+        "qiime feature-table rarefy"
+        " --i-table {input}"
+        " --p-sampling-depth {params.depth}"
+        " --o-rarefied-table {output}"
+
+rule get_depth:
+    output:
+        config["rarefaction-depth"]
+    input:
+        config["table-tsv"]
+    run:
+        with open(output[0], 'w') as f:
+            f.write(str(minimum_depth(input[0])))
+
+rule convert_table:
+    output:
+        config["table-tsv"]
+    input:
+        "feature-table.biom"
+    shell:
+        "biom convert --to-tsv -i {input} -o {output}"
+
+rule export_table:
+    output:
+        "feature-table.biom"
+    input:
+        config["table"]
+    shell:
+        "qiime tools export"
+        " --input-path {input}"
+        " --output-path ."
+
+rule denoise:
+    output:
+        table = config["table"],
+        seqs = config["rep-seqs"],
+        stats = config["denoise-stats"]
+    input:
+        config["filter"]
+    shell:
+        "qiime deblur denoise-16S"
+        " --i-demultiplexed-seqs {input}"
+        f" --p-trim-length {config['trim-length']}"
+        f" --p-min-reads {config['min-reads']}"
+        f" --p-jobs-to-start {config['jobs-to-start']}"
+        " --p-sample-stats"
+        " --o-table {output.table}"
+        " --o-representative-sequences {output.seqs}"
+        " --o-stats {output.stats}"
+
+rule filter:
+    output:
+        filter = config["filter"],
+        stats = config["filter-stats"]
+    input:
+        config["demux"]
+    shell:
+        "qiime quality-filter q-score "
+        " --i-demux {input}"
+        " --o-filtered-sequences {output.filter}"
+        " --o-filter-stats {output.stats}"
+
+
+rule demultiplex:
+    output:
+        config["demux"]
+    input:
+        samples.filepath,
+        manifest = config["manifest"]
+    shell:
+        "qiime tools import"
+        " --type 'SampleData[SequencesWithQuality']"
+        " --input-path {input.manifest}"
+        " --input-format SingleEndFastqManifestPhred33"
+        " --output-path {output}"
+
+rule write_manifest:
+    output:
+        config["manifest"]
+    run:
+        (samples[['library_name', 'absolute_filepath']]
+            .rename(columns={'library_name': 'sample-id', 'absolute_filepath': 'absolute-filepath'})
+            .assign(direction='forward')
+        ).to_csv(output[0], index=False)
+
+
+rule download_fastq:
+    params:
+        url = samples["url"],
+        md5 = samples["fastq_md5"]
+    output:
+        samples.filepath
+    run:
+        for url, filepath, md5 in zip(params.url, output, params.md5):
+            print(url, filepath, md5)
+            download_and_validate(url, filepath, md5)
+
+# Dummy rules ---------------------------------------------------------
+
+rule clean:
+    shell:
+        "rm "
+        " fastq/*"
+
+rule qiime:
+    run:
+        print("First run: source /anaconda3/bin/activate qiime2-2019.7")
+        print("Then: qiime --help")
