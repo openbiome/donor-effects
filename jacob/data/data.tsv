@@ -1,0 +1,15 @@
+patient_id	outcome	pool	donorA	donorB	donorC	donorD
+1	0	poolA	1	0	0	1
+2	1	poolB	1	1	0	0
+3	0	poolC	0	1	0	1
+4	1	poolD	0	1	1	0
+5	1	poolC	0	1	0	1
+12	1	poolF	0	0	1	1
+19	1	poolE	1	0	1	0
+21	0	poolE	1	0	1	0
+24	0	poolD	0	1	1	0
+25	1	poolD	0	1	1	0
+27	0	poolB	1	1	0	0
+28	1	poolF	0	0	1	1
+33	0	poolB	1	1	0	0
+34	1	poolC	0	1	0	1
