@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript --vanilla
 
 library(tidyverse)
+library(scales)
 
 powers <- read_tsv('powers.tsv')
 
@@ -10,14 +11,18 @@ upper_bound <- 0.30
 stopifnot(all(between(powers$effect_size, lower_bound, upper_bound), na.rm = TRUE))
 
 plot <- powers %>%
-  mutate(label = round(effect_size, 2) * 100) %>%
+  mutate(label = if_else(
+    is.na(effect_size),
+    '',
+    percent(effect_size, accuracy = 1)
+  )) %>%
   ggplot(aes(factor(n_donors), factor(n_patients))) +
   geom_tile(aes(fill = effect_size)) +
   geom_text(aes(label = label), size = 8 * 25.4 / 72) +
   scale_fill_gradient(
     name = '',
     limits = c(lower_bound, upper_bound + 1e-6),
-    labels = partial(scales::percent, accuracy = 1),
+    labels = partial(percent, accuracy = 1),
     low = 'white', high = 'red',
     na.value = 'gray75'
   ) +
