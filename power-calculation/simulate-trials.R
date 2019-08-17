@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(tidyr)
+library(tidyverse)
 library(exact2x2)
 
 logit <- function(p) log(p / (1 - p))

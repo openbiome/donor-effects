@@ -1,7 +1,8 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
+library(tidyverse)
 library(lme4)
-import::from(scales, percent)
+library(scales)
 
 data <- read_tsv('data/data.tsv') %>%
   mutate(route = factor(route, levels = c('lower', 'upper', 'capsule', 'both')))

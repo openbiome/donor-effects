@@ -1,6 +1,7 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
-library(exact2x2, quietly = TRUE)
+library(tidyverse)
+library(exact2x2)
 
 # Donor B's performance, compared to all other donors
 data <- c(7, 18 - 7, 2, 20 - 2) %>%

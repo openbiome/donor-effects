@@ -1,7 +1,9 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
+
+library(tidyverse)
 
 # Read the diversity file produced by Qiime
-raw <- read_tsv('raw/alpha-diversity.tsv', skip = 1, col_names = c('sample_id', 'diversity'))
+raw <- read_tsv('data/alpha-diversity.tsv', skip = 1, col_names = c('sample_id', 'diversity'))
 
 # Clean up the diversity table
 diversity <- raw %>%

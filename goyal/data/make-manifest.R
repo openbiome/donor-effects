@@ -1,4 +1,6 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
+
+library(tidyverse)
 
 study_accession <- "PRJNA380944"
 

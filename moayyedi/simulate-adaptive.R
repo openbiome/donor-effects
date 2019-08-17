@@ -1,8 +1,9 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
 # Adaptive trial simulation
 
-library(exact2x2, quietly = TRUE)
+library(tidyverse)
+library(exact2x2)
 
 n_donors <- 6
 n_explore_flips <- 4

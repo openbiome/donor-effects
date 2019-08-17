@@ -1,9 +1,9 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
+library(tidyverse)
 library(exact2x2)
 library(lme4)
-import::from(lmtest, lrtest)
-import::from(scales, percent)
+library(scales)
 
 data <- read_tsv('data/data.tsv')
 

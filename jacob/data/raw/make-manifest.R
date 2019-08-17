@@ -1,10 +1,6 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
-library(readr)
-library(dplyr)
-library(stringr)
-library(purrr)
-library(tidyr)
+library(tidyverse)
 
 patients <- read_tsv(snakemake@input$patient_data)
 

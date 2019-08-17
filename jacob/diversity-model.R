@@ -1,8 +1,8 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
+library(tidyverse)
 library(lme4)
-import::from(lmtest, lrtest)
-import::from(scales, percent)
+library(scales)
 
 patients <- read_tsv('data/data.tsv')
 diversity <- read_tsv('data/raw/alpha-diversity.tsv') %>%

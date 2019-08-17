@@ -1,4 +1,6 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
+
+library(tidyverse)
 
 data <- read_tsv('data.tsv')
 

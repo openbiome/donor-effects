@@ -1,9 +1,9 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
+library(tidyverse, quietly = TRUE)
 library(lme4)
-library(tidyr)
 library(exact2x2)
-import::from(scales, percent)
+library(scales)
 
 data <- read_tsv('data.tsv') %>%
   filter(fmt == 1)

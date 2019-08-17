@@ -2,11 +2,8 @@
 
 # Analysis of Rossen et al.
 
-# Load packages -------------------------------------------------------
-
-library(dplyr, quietly = TRUE)
-library(purrr, quietly = TRUE)
-library(exact2x2, quietly = TRUE)
+library(tidyverse)
+library(exact2x2)
 
 # Load data -----------------------------------------------------------
 
