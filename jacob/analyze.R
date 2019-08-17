@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript --vanilla
 
-library(tidyverse)
 library(exact2x2)
 library(lme4)
-library(scales)
+library(tidyverse)
+source('../utils/utils.R')
 
 data <- read_tsv('data/data.tsv')
 
@@ -64,19 +64,4 @@ summary(model)
 
 cat("\n\nTypical deviations ---------------------------------\n")
 
-invlogit <- function(lo) exp(lo) / (1 + exp(lo))
-
-estimate <- model %>% summary %>% coef %>% { .['(Intercept)', 'Estimate'] }
-ran_sd <- model %>% VarCorr %$% pool %>% attr('stddev') %>% unname
-ran_sd_ci <- confint(model, oldNames = FALSE, parm = 'sd_(Intercept)|pool')
-
-typical <- function(mean, sd, n = 1e6) {
-  p1 <- invlogit(rnorm(n, mean, sd))
-  p2 <- invlogit(rnorm(n, mean, sd))
-  median(abs(p1 - p2))
-}
-
-cat(str_glue("Baseline efficacy: {estimate} -> {percent(invlogit(estimate))}\n\n"))
-cat(str_glue("Typical deviation: {ran_sd} -> {percent(typical(estimate, ran_sd))}\n\n"))
-cat(str_glue("Typical deviation (lower 95% CI): {ran_sd_ci[1]} -> {percent(typical(estimate, ran_sd_ci[1]))}\n\n"))
-cat(str_glue("Typical deviation (upper 95% CI): {ran_sd_ci[2]} -> {percent(typical(estimate, ran_sd_ci[2]))}\n\n"))
+print(effect_sizes(model))

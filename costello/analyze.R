@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript --vanilla
 
-library(tidyverse, quietly = TRUE)
 library(lme4)
 library(exact2x2)
-library(scales)
+library(tidyverse)
+source('../utils/utils.R')
 
 data <- read_tsv('data.tsv') %>%
   filter(fmt == 1)
@@ -60,16 +60,4 @@ summary(model)
 
 cat("\nTypical deviations --------------------------------------------------\n")
 
-invlogit <- function(x) exp(x) / (1 + exp(x))
-fix_est <- fixef(model)
-ran_sd_ci <- confint(model, parm = '.sig01')
-
-typical <- function(mean, sd, n = 1e6) {
-  p1 <- invlogit(rnorm(n, mean, sd))
-  p2 <- invlogit(rnorm(n, mean, sd))
-  median(abs(p1 - p2))
-}
-
-cat(str_glue("Baseline efficacy: {fix_est} -> {percent(invlogit(fix_est))}\n\n"))
-cat(str_glue("Typical deviation (lower 95% CI): {ran_sd_ci[1]} -> {percent(typical(fix_est, ran_sd_ci[1]))}\n\n"))
-cat(str_glue("Typical deviation (upper 95% CI): {ran_sd_ci[2]} -> {percent(typical(fix_est, ran_sd_ci[2]))}\n\n"))
+print(effect_sizes(model))
