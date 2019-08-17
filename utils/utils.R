@@ -6,7 +6,7 @@ median_difference <- function(mean, sd, n = 1e6) {
   median(abs(p1 - p2))
 }
 
-effect_sizes <- function(model, by = 'pool', accuracy = 2) {
+effect_sizes <- function(model, by = 'pool', accuracy = 0) {
   estimate <- model %>% summary %>% coef %>% { .['(Intercept)', 'Estimate'] }
   ran_sd <- model %>% VarCorr %>% `[[`(by) %>% attr('stddev') %>% unname
   parm <- str_glue('sd_(Intercept)|{by}')
@@ -17,10 +17,13 @@ effect_sizes <- function(model, by = 'pool', accuracy = 2) {
   effect_size_cil <- median_difference(estimate, ran_sd_ci[1])
   effect_size_ciu <- median_difference(estimate, ran_sd_ci[2])
 
-  show <- function(x) sprintf('%.0f p.p.', x * 100)
+  efficacy_format <- str_glue('%.{accuracy}f%%')
+  effect_size_format <- str_glue('%.{accuracy}f p.p')
+
+  show <- function(x) sprintf(effect_size_format, x * 100)
 
   list(
-    baseline_efficacy = sprintf('%.0f%%', baseline_efficacy * 100),
+    baseline_efficacy = sprintf(efficacy_format, baseline_efficacy * 100),
     effect_size = show(effect_size),
     effect_size_cil = show(effect_size_cil),
     effect_size_ciu = show(effect_size_ciu)
