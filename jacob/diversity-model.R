@@ -1,8 +1,8 @@
 #!/usr/bin/env Rscript --vanilla
 
-library(tidyverse)
 library(lme4)
 library(scales)
+library(tidyverse)
 
 patients <- read_tsv('data/data.tsv')
 diversity <- read_tsv('data/raw/alpha-diversity.tsv') %>%
@@ -42,7 +42,8 @@ tibble(
 
 plot <- data %>%
   ggplot(aes(factor(outcome), diversity)) +
-  geom_point(shape = 1, size = 2) +
+  geom_boxplot(width = 0.5, outlier.shape = NA) +
+  geom_point(shape = 1, size = 3) +
   scale_x_discrete(
     "",
     breaks = c(0, 1),
