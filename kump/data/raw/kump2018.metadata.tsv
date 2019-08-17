@@ -1,0 +1,173 @@
+#SampleID	Forward_read	Reverse_read	Matter	Identity	PatientID	DonorID	Response	Sampletype	prepost	Sampling_day
+34	34_S35_L001_R1_001.fastq	34_S35_L001_R2_001.fastq	Stool Patient	PD_S-10	PD	DB	NR	Patientstool	preABX	d-10
+35	35_S36_L001_R1_001.fastq	35_S36_L001_R2_001.fastq	Stool Patient	PD_S1	PD	DB	NR	Patientstool	postABX	d1
+36	36_S37_L001_R1_001.fastq	36_S37_L001_R2_001.fastq	Stool Patient	PD_S14	PD	DB	NR	Patientstool	postFMT	d14
+37	37_S38_L001_R1_001.fastq	37_S38_L001_R2_001.fastq	Stool Patient	PD_S28	PD	DB	NR	Patientstool	postFMT	d28
+38	38_S39_L001_R1_001.fastq	38_S39_L001_R2_001.fastq	Stool Patient	PD_S42	PD	DB	NR	Patientstool	postFMT	d42
+39	39_S40_L001_R1_001.fastq	39_S40_L001_R2_001.fastq	Stool Patient	PD_S56	PD	DB	NR	Patientstool	postFMT	d56
+40	40_S41_L001_R1_001.fastq	40_S41_L001_R2_001.fastq	Stool Patient	PD_S90	PD	DB	NR	Patientstool	postFMT	d90
+41	41_S42_L001_R1_001.fastq	41_S42_L001_R2_001.fastq	Donorstool	PD_D1	PD	DB	NR	Donorstool	Donorstool	d1
+43	43_S44_L001_R1_001.fastq	43_S44_L001_R2_001.fastq	Stool Patient	PE_S-10	PE	DC	RE	Patientstool	preABX	d-10
+44	44_S45_L001_R1_001.fastq	44_S45_L001_R2_001.fastq	Stool Patient	PE_S1	PE	DC	RE	Patientstool	postABX	d1
+45	45_S46_L001_R1_001.fastq	45_S46_L001_R2_001.fastq	Stool Patient	PE_S3	PE	DC	RE	Patientstool	postFMT	d3
+46	46_S47_L001_R1_001.fastq	46_S47_L001_R2_001.fastq	Stool Patient	PE_S14	PE	DC	RE	Patientstool	postFMT	d14
+47	47_S48_L001_R1_001.fastq	47_S48_L001_R2_001.fastq	Stool Patient	PE_S28	PE	DC	RE	Patientstool	postFMT	d28
+48	48_S49_L001_R1_001.fastq	48_S49_L001_R2_001.fastq	Stool Patient	PE_S42	PE	DC	RE	Patientstool	postFMT	d42
+49	49_S50_L001_R1_001.fastq	49_S50_L001_R2_001.fastq	Stool Patient	PE_S56	PE	DC	RE	Patientstool	postFMT	d56
+50	50_S51_L001_R1_001.fastq	50_S51_L001_R2_001.fastq	Stool Patient	PE_S90	PE	DC	RE	Patientstool	postFMT	d90
+51	51_S52_L001_R1_001.fastq	51_S52_L001_R2_001.fastq	Donorstool	PE_D1	PE	DC	RE	Donorstool	Donorstool	d1
+52	52_S53_L001_R1_001.fastq	52_S53_L001_R2_001.fastq	Donorstool	PE_D42	PE	DC	RE	Donorstool	Donorstool	d42
+53	53_S54_L001_R1_001.fastq	53_S54_L001_R2_001.fastq	Donorstool	PE_D56	PE	DC	RE	Donorstool	Donorstool	d56
+59	59_S60_L001_R1_001.fastq	59_S60_L001_R2_001.fastq	Stool Patient	PF_S1	PF	DD	PR	Patientstool	postABX	d1
+60	60_S61_L001_R1_001.fastq	60_S61_L001_R2_001.fastq	Stool Patient	PF_S3	PF	DD	PR	Patientstool	postFMT	d3
+61	61_S62_L001_R1_001.fastq	61_S62_L001_R2_001.fastq	Stool Patient	PF_S14	PF	DD	PR	Patientstool	postFMT	d14
+62	62_S63_L001_R1_001.fastq	62_S63_L001_R2_001.fastq	Stool Patient	PF_S28	PF	DD	PR	Patientstool	postFMT	d28
+63	63_S65_L001_R1_001.fastq	63_S65_L001_R2_001.fastq	Stool Patient	PF_S42	PF	DD	PR	Patientstool	postFMT	d42
+64	64_S66_L001_R1_001.fastq	64_S66_L001_R2_001.fastq	Stool Patient	PF_S56	PF	DD	PR	Patientstool	postFMT	d56
+65	65_S67_L001_R1_001.fastq	65_S67_L001_R2_001.fastq	Stool Patient	PF_S90	PF	DD	PR	Patientstool	postFMT	d90
+66	66_S68_L001_R1_001.fastq	66_S68_L001_R2_001.fastq	Donorstool	PF_D1	PF	DD	PR	Donorstool	Donorstool	d1
+67	67_S69_L001_R1_001.fastq	67_S69_L001_R2_001.fastq	Donorstool	PF_D14	PF	DD	PR	Donorstool	Donorstool	d14
+68	68_S70_L001_R1_001.fastq	68_S70_L001_R2_001.fastq	Donorstool	PF_D28	PF	DD	PR	Donorstool	Donorstool	d28
+69	69_S71_L001_R1_001.fastq	69_S71_L001_R2_001.fastq	Donorstool	PF_D42	PF	DD	PR	Donorstool	Donorstool	d42
+70	70_S72_L001_R1_001.fastq	70_S72_L001_R2_001.fastq	Donorstool	PF_D56	PF	DD	PR	Donorstool	Donorstool	d56
+75	75_S77_L001_R1_001.fastq	75_S77_L001_R2_001.fastq	Stool Patient	PG_S1	PG	DE	PR	Patientstool	postABX	d1
+76	76_S78_L001_R1_001.fastq	76_S78_L001_R2_001.fastq	Stool Patient	PG_S3	PG	DE	PR	Patientstool	postFMT	d3
+77	77_S79_L001_R1_001.fastq	77_S79_L001_R2_001.fastq	Stool Patient	PG_S14	PG	DE	PR	Patientstool	postFMT	d14
+78	78_S80_L001_R1_001.fastq	78_S80_L001_R2_001.fastq	Stool Patient	PG_S28	PG	DE	PR	Patientstool	postFMT	d28
+79	79_S81_L001_R1_001.fastq	79_S81_L001_R2_001.fastq	Stool Patient	PG_S42	PG	DE	PR	Patientstool	postFMT	d42
+80	80_S82_L001_R1_001.fastq	80_S82_L001_R2_001.fastq	Stool Patient	PG_S56	PG	DE	PR	Patientstool	postFMT	d56
+81	81_S83_L001_R1_001.fastq	81_S83_L001_R2_001.fastq	Stool Patient	PG_S90	PG	DE	PR	Patientstool	postFMT	d90
+82	82_S84_L001_R1_001.fastq	82_S84_L001_R2_001.fastq	Donorstool	PG_D1	PG	DE	PR	Donorstool	Donorstool	d1
+83	83_S85_L001_R1_001.fastq	83_S85_L001_R2_001.fastq	Donorstool	PG_D14	PG	DE	PR	Donorstool	Donorstool	d14
+84	84_S86_L001_R1_001.fastq	84_S86_L001_R2_001.fastq	Donorstool	PG_D42	PG	DE	PR	Donorstool	Donorstool	d42
+85	85_S87_L001_R1_001.fastq	85_S87_L001_R2_001.fastq	Donorstool	PG_D56	PG	DE	PR	Donorstool	Donorstool	d56
+90	90_S92_L001_R1_001.fastq	90_S92_L001_R2_001.fastq	Stool Patient	PH_S-10	PH	DF	NR	Patientstool	preABX	d-10
+91	91_S93_L001_R1_001.fastq	91_S93_L001_R2_001.fastq	Stool Patient	PH_S1	PH	DF	NR	Patientstool	postABX	d1
+92	92_S94_L001_R1_001.fastq	92_S94_L001_R2_001.fastq	Stool Patient	PH_S3	PH	DF	NR	Patientstool	postFMT	d3
+93	93_S95_L001_R1_001.fastq	93_S95_L001_R2_001.fastq	Stool Patient	PH_S14	PH	DF	NR	Patientstool	postFMT	d14
+94	94_S97_L001_R1_001.fastq	94_S97_L001_R2_001.fastq	Stool Patient	PH_S28	PH	DF	NR	Patientstool	postFMT	d28
+95	95_S98_L001_R1_001.fastq	95_S98_L001_R2_001.fastq	Stool Patient	PH_S56	PH	DF	NR	Patientstool	postFMT	d56
+96	96_S99_L001_R1_001.fastq	96_S99_L001_R2_001.fastq	Donorstool	PH_D14	PH	DF	NR	Donorstool	Donorstool	d14
+97	97_S100_L001_R1_001.fastq	97_S100_L001_R2_001.fastq	Donorstool	PH_D28	PH	DF	NR	Donorstool	Donorstool	d28
+98	98_S101_L001_R1_001.fastq	98_S101_L001_R2_001.fastq	Donorstool	PH_D42	PH	DF	NR	Donorstool	Donorstool	d42
+99	99_S102_L001_R1_001.fastq	99_S102_L001_R2_001.fastq	Donorstool	PH_D56	PH	DF	NR	Donorstool	Donorstool	d56
+104	104_S107_L001_R1_001.fastq	104_S107_L001_R2_001.fastq	Stool Patient	PI_S-10	PI	DG	RE	Patientstool	preABX	d-10
+105	105_S108_L001_R1_001.fastq	105_S108_L001_R2_001.fastq	Stool Patient	PI_S1	PI	DG	RE	Patientstool	postABX	d1
+106	106_S109_L001_R1_001.fastq	106_S109_L001_R2_001.fastq	Stool Patient	PI_S3	PI	DG	RE	Patientstool	postFMT	d3
+107	107_S110_L001_R1_001.fastq	107_S110_L001_R2_001.fastq	Stool Patient	PI_S14	PI	DG	RE	Patientstool	postFMT	d14
+108	108_S111_L001_R1_001.fastq	108_S111_L001_R2_001.fastq	Stool Patient	PI_S28	PI	DG	RE	Patientstool	postFMT	d28
+109	109_S112_L001_R1_001.fastq	109_S112_L001_R2_001.fastq	Stool Patient	PI_S42	PI	DG	RE	Patientstool	postFMT	d42
+110	110_S113_L001_R1_001.fastq	110_S113_L001_R2_001.fastq	Stool Patient	PI_S56	PI	DG	RE	Patientstool	postFMT	d56
+111	111_S114_L001_R1_001.fastq	111_S114_L001_R2_001.fastq	Stool Patient	PI_S90	PI	DG	RE	Patientstool	postFMT	d90
+112	112_S115_L001_R1_001.fastq	112_S115_L001_R2_001.fastq	Donorstool	PI_D1	PI	DG	RE	Donorstool	Donorstool	d1
+113	113_S116_L001_R1_001.fastq	113_S116_L001_R2_001.fastq	Donorstool	PI_D14	PI	DG	RE	Donorstool	Donorstool	d14
+114	114_S117_L001_R1_001.fastq	114_S117_L001_R2_001.fastq	Donorstool	PI_D28	PI	DG	RE	Donorstool	Donorstool	d28
+115	115_S118_L001_R1_001.fastq	115_S118_L001_R2_001.fastq	Donorstool	PI_D42	PI	DG	RE	Donorstool	Donorstool	d42
+116	116_S119_L001_R1_001.fastq	116_S119_L001_R2_001.fastq	Donorstool	PI_D56	PI	DG	RE	Donorstool	Donorstool	d56
+135	135_S1_L001_R1_001.fastq	135_S1_L001_R2_001.fastq	Stool Patient	PK_S1	PK	DC	PR	Patientstool	postABX	d1
+136	136_S2_L001_R1_001.fastq	136_S2_L001_R2_001.fastq	Stool Patient	PK_S14	PK	DC	PR	Patientstool	postFMT	d14
+137	137_S3_L001_R1_001.fastq	137_S3_L001_R2_001.fastq	Stool Patient	PK_S28	PK	DC	PR	Patientstool	postFMT	d28
+138	138_S4_L001_R1_001.fastq	138_S4_L001_R2_001.fastq	Stool Patient	PK_S42	PK	DC	PR	Patientstool	postFMT	d42
+139	139_S5_L001_R1_001.fastq	139_S5_L001_R2_001.fastq	Stool Patient	PK_S56	PK	DC	PR	Patientstool	postFMT	d56
+140	140_S6_L001_R1_001.fastq	140_S6_L001_R2_001.fastq	Stool Patient	PK_S90	PK	DC	PR	Patientstool	postFMT	d90
+141	141_S7_L001_R1_001.fastq	141_S7_L001_R2_001.fastq	Donorstool	PK_D1	PK	DC	PR	Donorstool	Donorstool	d1
+142	142_S8_L001_R1_001.fastq	142_S8_L001_R2_001.fastq	Donorstool	PK_D14	PK	DC	PR	Donorstool	Donorstool	d14
+143	143_S9_L001_R1_001.fastq	143_S9_L001_R2_001.fastq	Donorstool	PK_D28	PK	DC	PR	Donorstool	Donorstool	d28
+144	144_S10_L001_R1_001.fastq	144_S10_L001_R2_001.fastq	Donorstool	PK_D42	PK	DC	PR	Donorstool	Donorstool	d42
+145	145_S11_L001_R1_001.fastq	145_S11_L001_R2_001.fastq	Donorstool	PK_D56	PK	DC	PR	Donorstool	Donorstool	d56
+151	151_S17_L001_R1_001.fastq	151_S17_L001_R2_001.fastq	Stool Patient	PL_S-10	PL	DI	NR	Patientstool	preABX	d-10
+152	152_S18_L001_R1_001.fastq	152_S18_L001_R2_001.fastq	Stool Patient	PL_S1	PL	DI	NR	Patientstool	postABX	d1
+153	153_S19_L001_R1_001.fastq	153_S19_L001_R2_001.fastq	Stool Patient	PL_S3	PL	DI	NR	Patientstool	postFMT	d3
+154	154_S20_L001_R1_001.fastq	154_S20_L001_R2_001.fastq	Stool Patient	PL_S28	PL	DI	NR	Patientstool	postFMT	d28
+155	155_S21_L001_R1_001.fastq	155_S21_L001_R2_001.fastq	Stool Patient	PL_S42	PL	DI	NR	Patientstool	postFMT	d42
+156	156_S23_L001_R1_001.fastq	156_S23_L001_R2_001.fastq	Stool Patient	PL_S56	PL	DI	NR	Patientstool	postFMT	d56
+157	157_S24_L001_R1_001.fastq	157_S24_L001_R2_001.fastq	Donorstool	PL_D14	PL	DI	NR	Donorstool	Donorstool	d14
+158	158_S25_L001_R1_001.fastq	158_S25_L001_R2_001.fastq	Donorstool	PL_D28	PL	DI	NR	Donorstool	Donorstool	d28
+159	159_S26_L001_R1_001.fastq	159_S26_L001_R2_001.fastq	Donorstool	PL_D42	PL	DI	NR	Donorstool	Donorstool	d42
+163	163_S30_L001_R1_001.fastq	163_S30_L001_R2_001.fastq	Stool Patient	PM_S-10	PM	DJ	NR	Patientstool	preABX	d-10
+164	164_S31_L001_R1_001.fastq	164_S31_L001_R2_001.fastq	Stool Patient	PM_S1	PM	DJ	NR	Patientstool	postABX	d1
+165	165_S32_L001_R1_001.fastq	165_S32_L001_R2_001.fastq	Stool Patient	PM_S3	PM	DJ	NR	Patientstool	postFMT	d3
+166	166_S33_L001_R1_001.fastq	166_S33_L001_R2_001.fastq	Stool Patient	PM_S14	PM	DJ	NR	Patientstool	postFMT	d14
+167	167_S34_L001_R1_001.fastq	167_S34_L001_R2_001.fastq	Stool Patient	PM_S28	PM	DJ	NR	Patientstool	postFMT	d28
+168	168_S35_L001_R1_001.fastq	168_S35_L001_R2_001.fastq	Stool Patient	PM_S42	PM	DJ	NR	Patientstool	postFMT	d42
+169	169_S36_L001_R1_001.fastq	169_S36_L001_R2_001.fastq	Stool Patient	PM_S56	PM	DJ	NR	Patientstool	postFMT	d56
+170	170_S37_L001_R1_001.fastq	170_S37_L001_R2_001.fastq	Stool Patient	PM_S90	PM	DJ	NR	Patientstool	postFMT	d90
+171	171_S38_L001_R1_001.fastq	171_S38_L001_R2_001.fastq	Donorstool	PM_D1	PM	DJ	NR	Donorstool	Donorstool	d1
+172	172_S39_L001_R1_001.fastq	172_S39_L001_R2_001.fastq	Donorstool	PM_D14	PM	DJ	NR	Donorstool	Donorstool	d14
+173	173_S40_L001_R1_001.fastq	173_S40_L001_R2_001.fastq	Donorstool	PM_D28	PM	DJ	NR	Donorstool	Donorstool	d28
+174	174_S41_L001_R1_001.fastq	174_S41_L001_R2_001.fastq	Donorstool	PM_D42	PM	DJ	NR	Donorstool	Donorstool	d42
+180	180_S47_L001_R1_001.fastq	180_S47_L001_R2_001.fastq	Stool Patient	PN_S1	PN	DK	RE	Patientstool	postABX	d1
+181	181_S48_L001_R1_001.fastq	181_S48_L001_R2_001.fastq	Stool Patient	PN_S3	PN	DK	RE	Patientstool	postFMT	d3
+182	182_S49_L001_R1_001.fastq	182_S49_L001_R2_001.fastq	Stool Patient	PN_S28	PN	DK	RE	Patientstool	postFMT	d28
+183	183_S50_L001_R1_001.fastq	183_S50_L001_R2_001.fastq	Stool Patient	PN_S42	PN	DK	RE	Patientstool	postFMT	d42
+184	184_S51_L001_R1_001.fastq	184_S51_L001_R2_001.fastq	Donorstool	PN_D1	PN	DK	RE	Donorstool	Donorstool	d1
+186	186_S53_L001_R1_001.fastq	186_S53_L001_R2_001.fastq	Donorstool	PN_D28	PN	DK	RE	Donorstool	Donorstool	d28
+187	187_S55_L001_R1_001.fastq	187_S55_L001_R2_001.fastq	Donorstool	PN_D42	PN	DK	RE	Donorstool	Donorstool	d42
+192	192_S60_L001_R1_001.fastq	192_S60_L001_R2_001.fastq	Stool Patient	PO_S1	PO	DL	RE	Patientstool	postABX	d1
+193	193_S61_L001_R1_001.fastq	193_S61_L001_R2_001.fastq	Stool Patient	PO_S3	PO	DL	RE	Patientstool	postFMT	d3
+194	194_S62_L001_R1_001.fastq	194_S62_L001_R2_001.fastq	Stool Patient	PO_S14	PO	DL	RE	Patientstool	postFMT	d14
+195	195_S63_L001_R1_001.fastq	195_S63_L001_R2_001.fastq	Stool Patient	PO_S28	PO	DL	RE	Patientstool	postFMT	d28
+196	196_S64_L001_R1_001.fastq	196_S64_L001_R2_001.fastq	Stool Patient	PO_S42	PO	DL	RE	Patientstool	postFMT	d42
+197	197_S65_L001_R1_001.fastq	197_S65_L001_R2_001.fastq	Stool Patient	PO_S56	PO	DL	RE	Patientstool	postFMT	d56
+198	198_S66_L001_R1_001.fastq	198_S66_L001_R2_001.fastq	Stool Patient	PO_S90	PO	DL	RE	Patientstool	postFMT	d90
+199	199_S67_L001_R1_001.fastq	199_S67_L001_R2_001.fastq	Donorstool	PO_D1	PO	DL	RE	Donorstool	Donorstool	d1
+200	200_S68_L001_R1_001.fastq	200_S68_L001_R2_001.fastq	Donorstool	PO_D14	PO	DL	RE	Donorstool	Donorstool	d14
+201	201_S69_L001_R1_001.fastq	201_S69_L001_R2_001.fastq	Donorstool	PO_D28	PO	DL	RE	Donorstool	Donorstool	d28
+202	202_S70_L001_R1_001.fastq	202_S70_L001_R2_001.fastq	Donorstool	PO_D42	PO	DL	RE	Donorstool	Donorstool	d42
+203	203_S71_L001_R1_001.fastq	203_S71_L001_R2_001.fastq	Donorstool	PO_D56	PO	DL	RE	Donorstool	Donorstool	d56
+209	209_S77_L001_R1_001.fastq	209_S77_L001_R2_001.fastq	Stool Patient	PP_S1	PP	DM	PR	Patientstool	postABX	d1
+210	210_S78_L001_R1_001.fastq	210_S78_L001_R2_001.fastq	Stool Patient	PP_S3	PP	DM	PR	Patientstool	postFMT	d3
+211	211_S79_L001_R1_001.fastq	211_S79_L001_R2_001.fastq	Stool Patient	PP_S14	PP	DM	PR	Patientstool	postFMT	d14
+212	212_S80_L001_R1_001.fastq	212_S80_L001_R2_001.fastq	Stool Patient	PP_S28	PP	DM	PR	Patientstool	postFMT	d28
+213	213_S81_L001_R1_001.fastq	213_S81_L001_R2_001.fastq	Stool Patient	PP_S42	PP	DM	PR	Patientstool	postFMT	d42
+214	214_S82_L001_R1_001.fastq	214_S82_L001_R2_001.fastq	Stool Patient	PP_S56	PP	DM	PR	Patientstool	postFMT	d56
+215	215_S83_L001_R1_001.fastq	215_S83_L001_R2_001.fastq	Stool Patient	PP_S90	PP	DM	PR	Patientstool	postFMT	d90
+216	216_S84_L001_R1_001.fastq	216_S84_L001_R2_001.fastq	Donorstool	PP_D1	PP	DM	PR	Donorstool	Donorstool	d1
+217	217_S85_L001_R1_001.fastq	217_S85_L001_R2_001.fastq	Donorstool	PP_D14	PP	DM	PR	Donorstool	Donorstool	d14
+218	218_S87_L001_R1_001.fastq	218_S87_L001_R2_001.fastq	Donorstool	PP_D28	PP	DM	PR	Donorstool	Donorstool	d28
+219	219_S88_L001_R1_001.fastq	219_S88_L001_R2_001.fastq	Donorstool	PP_D42	PP	DM	PR	Donorstool	Donorstool	d42
+220	220_S89_L001_R1_001.fastq	220_S89_L001_R2_001.fastq	Donorstool	PP_D56	PP	DM	PR	Donorstool	Donorstool	d56
+226	226_S95_L001_R1_001.fastq	226_S95_L001_R2_001.fastq	Stool Patient	PQ_S-10	PQ	DN	PR	Patientstool	preABX	d-10
+227	227_S96_L001_R1_001.fastq	227_S96_L001_R2_001.fastq	Stool Patient	PQ_S1	PQ	DN	PR	Patientstool	postABX	d1
+228	228_S97_L001_R1_001.fastq	228_S97_L001_R2_001.fastq	Stool Patient	PQ_S3	PQ	DN	PR	Patientstool	postFMT	d3
+229	229_S98_L001_R1_001.fastq	229_S98_L001_R2_001.fastq	Stool Patient	PQ_S14	PQ	DN	PR	Patientstool	postFMT	d14
+230	230_S99_L001_R1_001.fastq	230_S99_L001_R2_001.fastq	Stool Patient	PQ_S28	PQ	DN	PR	Patientstool	postFMT	d28
+231	231_S100_L001_R1_001.fastq	231_S100_L001_R2_001.fastq	Stool Patient	PQ_S42	PQ	DN	PR	Patientstool	postFMT	d42
+232	232_S101_L001_R1_001.fastq	232_S101_L001_R2_001.fastq	Stool Patient	PQ_S56	PQ	DN	PR	Patientstool	postFMT	d56
+233	233_S102_L001_R1_001.fastq	233_S102_L001_R2_001.fastq	Stool Patient	PQ_S90	PQ	DN	PR	Patientstool	postFMT	d90
+234	234_S103_L001_R1_001.fastq	234_S103_L001_R2_001.fastq	Donorstool	PQ_D1	PQ	DN	PR	Donorstool	Donorstool	d1
+235	235_S104_L001_R1_001.fastq	235_S104_L001_R2_001.fastq	Donorstool	PQ_D14	PQ	DN	PR	Donorstool	Donorstool	d14
+236	236_S105_L001_R1_001.fastq	236_S105_L001_R2_001.fastq	Donorstool	PQ_D42	PQ	DN	PR	Donorstool	Donorstool	d42
+237	237_S106_L001_R1_001.fastq	237_S106_L001_R2_001.fastq	Donorstool	PQ_D56	PQ	DN	PR	Donorstool	Donorstool	d56
+242	242_S111_L001_R1_001.fastq	242_S111_L001_R2_001.fastq	Stool Patient	CA_S-10	CA	Control	Control	Patientstool	preABX	d-10
+243	243_S112_L001_R1_001.fastq	243_S112_L001_R2_001.fastq	Stool Patient	CA_S1	CA	Control	Control	Patientstool	postABX	d1
+244	244_S113_L001_R1_001.fastq	244_S113_L001_R2_001.fastq	Stool Patient	CA_S14	CA	Control	Control	Patientstool	control	d14
+245	245_S114_L001_R1_001.fastq	245_S114_L001_R2_001.fastq	Stool Patient	CB_S-10	CB	Control	Control	Patientstool	preABX	d-10
+246	246_S115_L001_R1_001.fastq	246_S115_L001_R2_001.fastq	Stool Patient	CB_S1	CB	Control	Control	Patientstool	postABX	d1
+247	247_S116_L001_R1_001.fastq	247_S116_L001_R2_001.fastq	Stool Patient	CB_S14	CB	Control	Control	Patientstool	control	d14
+248	248_S117_L001_R1_001.fastq	248_S117_L001_R2_001.fastq	Stool Patient	CC_S-10	CC	Control	Control	Patientstool	preABX	d-10
+249	249_S119_L001_R1_001.fastq	249_S119_L001_R2_001.fastq	Stool Patient	CC_S1	CC	Control	Control	Patientstool	postABX	d1
+250	250_S120_L001_R1_001.fastq	250_S120_L001_R2_001.fastq	Stool Patient	CC_S14	CC	Control	Control	Patientstool	control	d14
+251	251_S121_L001_R1_001.fastq	251_S121_L001_R2_001.fastq	Stool Patient	CC_S90	CC	Control	Control	Patientstool	control	d90
+252	252_S122_L001_R1_001.fastq	252_S122_L001_R2_001.fastq	Stool Patient	CD_S-10	CD	Control	Control	Patientstool	preABX	d-10
+253	253_S123_L001_R1_001.fastq	253_S123_L001_R2_001.fastq	Stool Patient	CE_S-10	CE	Control	Control	Patientstool	preABX	d-10
+254	254_S124_L001_R1_001.fastq	254_S124_L001_R2_001.fastq	Stool Patient	CE_S1	CE	Control	Control	Patientstool	postABX	d1
+255	255_S125_L001_R1_001.fastq	255_S125_L001_R2_001.fastq	Stool Patient	CE_S14	CE	Control	Control	Patientstool	control	d14
+256	256_S126_L001_R1_001.fastq	256_S126_L001_R2_001.fastq	Stool Patient	CE_S90	CE	Control	Control	Patientstool	control	d90
+257	257_S127_L001_R1_001.fastq	257_S127_L001_R2_001.fastq	Stool Patient	CF_S-10	CF	Control	Control	Patientstool	preABX	d-10
+258	258_S128_L001_R1_001.fastq	258_S128_L001_R2_001.fastq	Stool Patient	CF_S1	CF	Control	Control	Patientstool	postABX	d1
+259	259_S129_L001_R1_001.fastq	259_S129_L001_R2_001.fastq	Stool Patient	CF_S34	CF	Control	Control	Patientstool	control	d14
+260	260_S130_L001_R1_001.fastq	260_S130_L001_R2_001.fastq	Stool Patient	CG_S-10	CG	Control	Control	Patientstool	preABX	d-10
+261	261_S131_L001_R1_001.fastq	261_S131_L001_R2_001.fastq	Stool Patient	CG_S1	CG	Control	Control	Patientstool	postABX	d1
+262	262_S132_L001_R1_001.fastq	262_S132_L001_R2_001.fastq	Stool Patient	CG_S14	CG	Control	Control	Patientstool	control	d14
+263	263_S133_L001_R1_001.fastq	263_S133_L001_R2_001.fastq	Stool Patient	CG_S90	CG	Control	Control	Patientstool	control	d90
+264	264_S134_L001_R1_001.fastq	264_S134_L001_R2_001.fastq	Stool Patient	CH_S-10	CH	Control	Control	Patientstool	preABX	d-10
+265	265_S135_L001_R1_001.fastq	265_S135_L001_R2_001.fastq	Stool Patient	CH_S1	CH	Control	Control	Patientstool	postABX	d1
+266	266_S136_L001_R1_001.fastq	266_S136_L001_R2_001.fastq	Stool Patient	CH_S14	CH	Control	Control	Patientstool	control	d14
+267	267_S137_L001_R1_001.fastq	267_S137_L001_R2_001.fastq	Stool Patient	CH_S90	CH	Control	Control	Patientstool	control	d90
+268	268_S138_L001_R1_001.fastq	268_S138_L001_R2_001.fastq	Stool Patient	CI_S1	CI	Control	Control	Patientstool	postABX	d1
+269	269_S139_L001_R1_001.fastq	269_S139_L001_R2_001.fastq	Stool Patient	CI_S14	CI	Control	Control	Patientstool	control	d14
+270	270_S140_L001_R1_001.fastq	270_S140_L001_R2_001.fastq	Stool Patient	CI_S90	CI	Control	Control	Patientstool	control	d90
+271	271_S141_L001_R1_001.fastq	271_S141_L001_R2_001.fastq	Stool Patient	CJ_S-10	CJ	Control	Control	Patientstool	preABX	d-10
+272	272_S142_L001_R1_001.fastq	272_S142_L001_R2_001.fastq	Stool Patient	CJ_S1	CJ	Control	Control	Patientstool	postABX	d1
+273	273_S143_L001_R1_001.fastq	273_S143_L001_R2_001.fastq	Stool Patient	CJ_S14	CJ	Control	Control	Patientstool	control	d14
