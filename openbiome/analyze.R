@@ -18,6 +18,8 @@ cat("\nLikelihood ratio test -------------------------------------------------\n
 null_model <- update(model, outcome ~ cdi_type + route + (1 | partner))
 lrtest(null_model, model)
 
-cat("\nTypical deviates ------------------------------------------------------\n")
-
+cat("\nDonor effect effect size ----------------------------------------------\n")
 print(effect_sizes(model, by = 'donor', accuracy = 1))
+
+cat("\nVariation between clinical partners -----------------------------------\n")
+print(effect_sizes(model, by = 'partner', accuracy = 1))
