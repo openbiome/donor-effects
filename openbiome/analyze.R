@@ -14,8 +14,11 @@ cat("\nMultivariate mixed model ----------------------------------------------\n
 model <- glmer(outcome ~ cdi_type + route + (1 | partner) + (1 | donor), family = 'binomial', data = data)
 summary(model)
 
-cat("\nLikelihood ratio test -------------------------------------------------\n")
+cat("\nLikelihood ratio tests ------------------------------------------------\n")
 null_model <- update(model, outcome ~ cdi_type + route + (1 | partner))
+lrtest(null_model, model)
+
+null_model <- update(model, outcome ~ cdi_type + route + (1 | donor))
 lrtest(null_model, model)
 
 cat("\nDonor effect effect size ----------------------------------------------\n")
