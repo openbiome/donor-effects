@@ -5,8 +5,7 @@ library(lmtest)
 library(tidyverse)
 source('../utils/utils.R')
 
-data <- read_tsv('private/data.tsv') %>%
-  mutate(route = factor(route, levels = c('lower', 'upper', 'capsule'), ordered = TRUE))
+data <- read_tsv('private/data.tsv')
 
 cat(str_glue("There are {nrow(data)} patients, treated with {length(unique(data$donor))} donors at {length(unique(data$partner))} partners\n"))
 
