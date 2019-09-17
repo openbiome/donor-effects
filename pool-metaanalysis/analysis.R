@@ -54,10 +54,3 @@ data <- bind_rows(
 model <- glmer(outcome ~ study + (1 | pool), family = 'binomial', data = data)
 summary(model)
 print(effect_sizes(model))
-
-
-# Model *not* including the study as a fixed effect -------------------
-
-model <- glmer(outcome ~ (1 | pool), family = 'binomial', data = data)
-summary(model)
-print(effect_sizes(model))
