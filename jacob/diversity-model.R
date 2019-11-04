@@ -4,6 +4,7 @@ library(lme4)
 library(scales)
 library(tidyverse)
 
+# Load patient outcomes and pool bacterial diversity
 patients <- read_tsv('data/data.tsv')
 diversity <- read_tsv('data/raw/alpha-diversity.tsv') %>%
   mutate(patient_id = as.integer(str_match(X1, 'patient(\\d+)')[, 2])) %>%
@@ -13,6 +14,7 @@ data <- patients %>%
   left_join(diversity, by = 'patient_id') %>%
   filter(!is.na(diversity))
 
+# Show the distribution of diversities by patient outcomes
 data %>%
   group_by(outcome) %>%
   summarize(
@@ -21,7 +23,13 @@ data %>%
     sem_diversity = sd(diversity) / sqrt(n)
   )
 
+
+# Wilcoxon test
+
 wilcox.test(diversity ~ outcome, data = data, conf.int = TRUE)
+
+
+# Logistic regression -------------------------------------------------
 
 model <- glm(outcome ~ diversity, family = 'binomial', data = data)
 summary(model)
@@ -38,7 +46,8 @@ tibble(
 ) %>%
   mutate_at(c('fit', 'cil', 'ciu'), invlogit)
 
-# figure
+
+# Make the figure -----------------------------------------------------
 
 plot <- data %>%
   ggplot(aes(factor(outcome), diversity)) +
@@ -62,6 +71,5 @@ plot <- data %>%
   )
 
 ggsave(
-  'diversity-by-outcome.pdf', plot = plot,
-  height = 3, width = 4, units = 'in'
+  'diversity-by-outcome.pdf', plot = plot, height = 3, width = 4, units = 'in'
 )

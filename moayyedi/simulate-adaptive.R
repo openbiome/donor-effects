@@ -5,22 +5,27 @@
 library(tidyverse)
 library(exact2x2)
 
+# Parameters
 n_donors <- 6
 n_explore_flips <- 4
 n_total_flips <- 38
-flip_p <- (7 + 2) / (18 + 20)
+flip_p <- (7 + 2) / (18 + 20) # probability of "heads" = positive patient outcome
 alpha <- 0.05
+n_iter <- 1e4
 
 max_n_flips <- n_total_flips - (n_donors - 1) * n_explore_flips
 stopifnot(max_n_flips > 0)
 
 simulate <- function() {
+  # Simulate all the flips, exploration & exploitation
   flips <- rbinom(n_donors * max_n_flips, 1, flip_p) %>%
     matrix(nrow = n_donors)
 
+  # Summarize donors' performance in exploration round
   exploration <- flips[, 1:n_explore_flips] %>% rowSums()
   best_donor_i <- which.max(exploration)
 
+  # Compare the exploration-best donor with other donors
   best_donor_flips <- flips[best_donor_i, ]
   other_donor_flips <- flips[-best_donor_i, 1:n_explore_flips]
 
@@ -32,9 +37,9 @@ simulate <- function() {
   matrix(c(good_success, good_fail, bad_success, bad_fail), nrow = 2)
 }
 
-results <- tibble(iter = 1:1e4) %>%
+results <- tibble(iter = 1:n_iter) %>%
   mutate(
-    data = rerun(n(), simulate()),
+    data = map(iter, ~ simulate()),
     midp = map_dbl(data, ~ exact2x2(., midp = TRUE)$p.value),
     significant = midp < 0.05
   )

@@ -3,6 +3,8 @@
 library(tidyverse)
 library(exact2x2)
 
+# Define functions -----------------------------------------------------
+
 logit <- function(p) log(p / (1 - p))
 invlogit <- function(x) exp(x) / (1 + exp(x))
 

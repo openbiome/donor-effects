@@ -6,6 +6,7 @@ library(tidyverse)
 
 source('../utils/utils.R')
 
+# Re-do the analysis on donor D54 as reported in the original paper
 cat("\n\nD54 comparison from the original paper -----------------------\n")
 
 paper_data <- c(14, 38 - 14, 7, 40 - 7) %>%
@@ -13,6 +14,7 @@ paper_data <- c(14, 38 - 14, 7, 40 - 7) %>%
 
 exact2x2(paper_data, midp = TRUE)
 
+# Read in the full data
 data <- read_tsv('data.tsv', col_types = cols(patient = 'c', treatment = 'c', .default = 'i')) %>%
   filter(treatment != 'no_rescue')
 

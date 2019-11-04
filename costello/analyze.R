@@ -5,9 +5,13 @@ library(exact2x2)
 library(tidyverse)
 source('../utils/utils.R')
 
+# Include only data from patients that received FMT
 data <- read_tsv('data.tsv') %>%
   filter(fmt == 1)
 
+# For each pool, count (i) the number of patients who got this pool and
+# had a positive outcome, (ii) a negative outcome, (iii) who got other
+# pools and had a positive outcome, and (iv) a negative outcome
 pool_table <- data %>%
   group_by(pool) %>%
   summarize(
