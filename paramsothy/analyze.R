@@ -15,25 +15,20 @@ paper_data <- c(14, 38 - 14, 7, 40 - 7) %>%
 exact2x2(paper_data, midp = TRUE)
 
 # Read in the full data
-data <- read_tsv('data.tsv', col_types = cols(patient = 'c', treatment = 'c', .default = 'i')) %>%
-  filter(treatment != 'no_rescue')
+raw_data <- read_tsv('data.tsv', col_types = cols(patient = 'c', treatment = 'c', .default = 'i'))
+
+# Check that the last donor is "M"
+stopifnot(last(names(raw_data)) == "M")
+
+data <- raw_data %>%
+  filter(treatment != 'no_rescue') %>%
+  # combine columns A through M into a single column "pool"
+  unite("pool", A:M)
 
 n_patients <- nrow(data)
-n_success <- data %>% filter(outcome == 1) %>% nrow
-
-# get all columns, starting at A until the end
-donors <- names(data) %>% { .[match('A', .):length(.)] }
-
+n_success <- sum(data$outcome)
 
 cat("\n\nOmnibus test of variance in efficacy by pool -----------------\n")
-
-# Add pool identifiers
-pools <- data %>%
-  select(donors) %>%
-  apply(1, function(x) str_c(x, collapse = '')) %>%
-  { LETTERS[match(., unique(.))] }
-
-data <- data %>% mutate(pool = pools)
 
 data %>%
   group_by(pool) %>%
