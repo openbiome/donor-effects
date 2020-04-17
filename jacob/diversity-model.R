@@ -5,8 +5,8 @@ library(scales)
 library(tidyverse)
 
 # Load patient outcomes and pool bacterial diversity
-patients <- read_tsv('data/data.tsv')
-diversity <- read_tsv('data/raw/alpha-diversity.tsv') %>%
+patients <- read_tsv('patient-data.tsv')
+diversity <- read_tsv('diversity-data/alpha-diversity.tsv') %>%
   mutate(patient_id = as.integer(str_match(X1, 'patient(\\d+)')[, 2])) %>%
   select(patient_id, diversity = observed_otus)
 

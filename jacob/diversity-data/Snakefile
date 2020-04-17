@@ -181,9 +181,10 @@ checkpoint manifest:
         samples = config["samples"]
     input:
         filereport = config["file-report"],
-        patient_data = "data.tsv"
+        patient_data = "../patient-data.tsv",
+        script = "make-manifest.R"
     script:
-        "make-manifest.R"
+        "./{input.script}"
 
 rule filereport:
     params:

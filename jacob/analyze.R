@@ -3,9 +3,9 @@
 library(exact2x2)
 library(lme4)
 library(tidyverse)
-source('../utils/utils.R')
+source("../utils.R")
 
-data <- read_tsv('data/data.tsv')
+data <- read_tsv("patient-data.tsv")
 
 
 cat(" 2 x P test of pools ------------------------------ \n\n")
@@ -32,7 +32,7 @@ total_success <- sum(data$outcome)
 total_fail <- sum(!data$outcome)
 
 donorwise <- data %>%
-  tidyr::gather('donor', 'donor_present', starts_with('donor')) %>%
+  tidyr::gather("donor", "donor_present", starts_with("donor")) %>%
   filter(donor_present == 1) %>%
   group_by(donor) %>%
   summarize(
@@ -47,7 +47,7 @@ donorwise <- data %>%
     n_patients = map_dbl(test_matrix, sum),
     test = map(test_matrix, ~ exact2x2(., midp = TRUE)),
     test_p = map_dbl(test, ~ .$p.value),
-    sig_adj = p.adjust(test_p, 'BH') < 0.05
+    sig_adj = p.adjust(test_p, "BH") < 0.05
   )
 
 # check that each 2x2 table has the right number of counts
@@ -59,7 +59,7 @@ donorwise %>%
 
 cat("\n\n Mixed pool model ----------------------------------\n\n")
 
-model <- glmer(outcome ~ (1 | pool), family = 'binomial', data = data)
+model <- glmer(outcome ~ (1 | pool), family = "binomial", data = data)
 summary(model)
 
 cat("\n\nTypical deviations ---------------------------------\n")
