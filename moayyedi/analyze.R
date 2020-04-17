@@ -1,9 +1,21 @@
 #!/usr/bin/env Rscript --vanilla
 
-# Adaptive trial simulation
-
 library(tidyverse)
 library(exact2x2)
+source("../utils.R", chdir=TRUE)
+
+# Table tests ---------------------------------------------------------
+telegraph("Table tests")
+
+# Donor B's performance, compared to all other donors
+data <- c(7, 18 - 7, 2, 20 - 2) %>%
+  matrix(nrow = 2)
+
+# Fisher-Freeman-Halton test with mid-p value
+exact2x2(data, midp = TRUE)
+
+# Adaptive trial simulation
+telegraph("Adaptive trial simulation")
 
 # Parameters
 n_donors <- 6

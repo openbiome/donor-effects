@@ -3,10 +3,10 @@
 library(lme4)
 library(exact2x2)
 library(tidyverse)
-source('../utils/utils.R')
+source("../utils.R")
 
 # Include only data from patients that received FMT
-data <- read_tsv('data.tsv') %>%
+data <- read_tsv("data.tsv") %>%
   filter(fmt == 1)
 
 # For each pool, count (i) the number of patients who got this pool and
@@ -28,15 +28,15 @@ pool_matrix <- pool_table %>%
   select(success, fail) %>%
   as.matrix()
 
-cat("\nFisher-Freeman-Halton test on 2xP table of outcomes by pool -----------\n")
+telegraph("Fisher-Freeman-Halton test on 2xP table of outcomes by pool")
 fisher.test(pool_matrix)
 
 
 # 2x2 tests by donor --------------------------------------------------
-cat("\nFisher's exact test on 2x2 tables of outcomes by donor ----------------\n")
+telegraph("Fisher's exact test on 2x2 tables of outcomes by donor")
 
 data %>%
-  gather('donor', 'present', starts_with('donor')) %>%
+  gather("donor", "present", starts_with("donor")) %>%
   group_by(donor, present) %>%
   summarize(
     success = sum(outcome),
@@ -57,11 +57,10 @@ data %>%
 
 # Logistic regression of outcomes by pool -----------------------------
 
-model <- glmer(outcome ~ (1 | pool), family = 'binomial', data = data)
+model <- glmer(outcome ~ (1 | pool), family = "binomial", data = data)
 
-cat("\nLogistic regression of outcomes by pool -----------------------------\n")
+telegraph("Logistic regression of outcomes by pool")
 summary(model)
 
-cat("\nTypical deviations --------------------------------------------------\n")
-
+telegraph("Typical deviations")
 print(effect_sizes(model))
