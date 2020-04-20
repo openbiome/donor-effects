@@ -15,7 +15,7 @@ paper_data <- c(14, 38 - 14, 7, 40 - 7) %>%
 exact2x2(paper_data, midp = TRUE)
 
 # Read in the full data
-raw_data <- read_tsv("data.tsv", col_types = cols(patient = "c", treatment = "c", .default = "i"))
+raw_data <- read_tsv("patient-data.tsv", col_types = cols(patient = "c", treatment = "c", .default = "i"))
 
 # Check that the last donor is "M"
 stopifnot(last(names(raw_data)) == "M")

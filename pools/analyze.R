@@ -8,7 +8,7 @@ source("../utils.R")
 # Paramsothy ----------------------------------------------------------
 
 paramsothy <- read_tsv(
-  "../paramsothy/data.tsv",
+  "../paramsothy/patient-data.tsv",
   col_types = cols(patient = "c", treatment = "c", .default = "i")
 ) %>%
   filter(treatment != "no_rescue")
@@ -26,7 +26,7 @@ paramsothy <- paramsothy %>% mutate(pool = pools)
 
 # Costello and Jacob --------------------------------------------------
 
-costello <- read_tsv("../costello/data.tsv") %>%
+costello <- read_tsv("../costello/patient-data.tsv") %>%
   filter(fmt == 1)
 
 jacob <- read_tsv("../jacob/patient-data.tsv")

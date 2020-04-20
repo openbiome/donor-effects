@@ -6,7 +6,7 @@ library(tidyverse)
 source("../utils.R")
 
 # Include only data from patients that received FMT
-data <- read_tsv("data.tsv") %>%
+data <- read_tsv("patient-data.tsv") %>%
   filter(fmt == 1)
 
 # For each pool, count (i) the number of patients who got this pool and
