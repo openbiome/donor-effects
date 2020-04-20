@@ -41,7 +41,7 @@ rule diversity:
     output:
         "alpha-diversity.qza"
     input:
-        "rarified-table.qza"
+        "rarefied-table.qza"
     params:
         metric = "shannon"
     shell:
