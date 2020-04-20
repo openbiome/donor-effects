@@ -1,6 +1,12 @@
-configfile: "config.yaml"
+# configfile: "config.yaml"
+
+import glob
 
 include: "../../16S.snakefile"
+
+rule test:
+    run:
+        print(glob.glob())
 
 rule all:
     input: "alpha-diversity.tsv"

@@ -52,7 +52,7 @@ rule diversity:
 
 rule rarefy:
     output:
-        "rarefied_table.qza"
+        "rarefied-table.qza"
     input:
         table = "table.qza",
         depth_file = "rarefaction-depth.txt"
@@ -175,10 +175,11 @@ checkpoint manifest:
         samples = "samples.csv"
     input:
         filereport = "filereport.tsv",
-        patient_data = "../patient-data.tsv",
+        metadata = config["metadata"],
         script = "make-manifest.R"
-    script:
-        "./{input.script}"
+    shell:
+        "./{input.script} --metadata {input.metadata} --filereport {input.filereport}"
+        " --manifest {output.manifest} --samples {output.samples}"
 
 rule filereport:
     params:

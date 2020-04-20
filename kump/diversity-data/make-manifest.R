@@ -1,9 +1,19 @@
 #!/usr/bin/env Rscript --vanilla
 
+library(optparse)
 library(tidyverse)
 
+option_list <- c(
+  make_option("--metadata"),
+  make_option("--filereport"),
+  make_option("--manifest"),
+  make_option("--samples")
+)
+
+opts <- parse_args(OptionParser(option_list = option_list))
+
 # Get the "sample ID" (called "sample_alias" in ENA) for donor samples
-meta <- read_tsv("../kump2018.metadata.tsv") %>%
+meta <- read_tsv(opts$metadata) %>%
   filter(DonorID != "Control", Matter == "Donorstool") %>%
   mutate(
     patient = str_replace(PatientID, "^P", "patient"),
@@ -13,7 +23,7 @@ meta <- read_tsv("../kump2018.metadata.tsv") %>%
   ) %>%
   select(sample_alias = `#SampleID`, sample_id)
 
-raw_filereport <- read_tsv(snakemake@input$filereport)
+raw_filereport <- read_tsv(options$filereport)
 
 filereport <- meta %>%
   left_join(raw_filereport, by = "sample_alias") %>%
@@ -38,5 +48,5 @@ manifest <- filereport %>%
 samples <- filereport %>%
   select(filepath, url, md5 = fastq_md5)
 
-write_csv(manifest, snakemake@output$manifest)
-write_csv(samples, snakemake@output$samples)
+write_csv(manifest, opts$manifest)
+write_csv(samples, opts$samples)

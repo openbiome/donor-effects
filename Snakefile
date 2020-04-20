@@ -1,8 +1,9 @@
 STUDIES=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal", "kump", "nishida", "pools"]
 
 subworkflow jacob_workflow:
-    workdir: "jacob/diversity-data"
+    workdir: "jacob/diversity-data/"
     snakefile: "16S.snakefile"
+    # snakefile: "jacob/diversity-data/Snakefile"
     configfile: "jacob/diversity-data/config.yaml"
 
 subworkflow goyal_workflow:
@@ -24,10 +25,11 @@ rule clean:
     shell:
         "find . -name '*.pdf' -delete"
         " && find . -name '*.fastq.gz' -delete"
-        " && find . -name 'results.txt' -delete"
+        " && find . -name '*.txt' -delete"
         " && find . -path '*/diversity-data/*.qza' -delete"
         " && find . -path '*/diversity-data/*.log' -delete"
         " && find . -path '*/diversity-data/*.tsv' -delete"
+        " && find . -path '*/diversity-data/*.biom' -delete"
 
 # Three studies have their data embedded in the scripts
 rule simple:
