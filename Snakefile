@@ -23,12 +23,11 @@ rule all:
 rule clean:
     shell:
         "find . -name '*.pdf' -delete"
-        "find . -name '*.fastq.gz' -delete"
+        " && find . -name '*.fastq.gz' -delete"
         " && find . -name 'results.txt' -delete"
         " && find . -path '*/diversity-data/*.qza' -delete"
         " && find . -path '*/diversity-data/*.log' -delete"
         " && find . -path '*/diversity-data/*.tsv' -delete"
-        " && find . -type d -name '.snakemake' -exec rm -rf {} +"
 
 # Three studies have their data embedded in the scripts
 rule simple:
