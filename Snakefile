@@ -15,11 +15,11 @@ subworkflow kump_workflow:
 
 rule all:
     input:
-        expand("{x}/results.txt", x=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal", "kump"]),
+        expand("{x}/results.txt", x=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal", "kump", "nishida", "pools"]),
         expand("{x}/plot.pdf", x=["jacob", "kump"])
 
 rule simple:
-    wildcard_constraints: x="(rossen|moayyedi)"
+    wildcard_constraints: x="(rossen|moayyedi|nishida|pools)"
     output: "{x}/results.txt"
     input: "utils.R", script="{x}/analyze.R"
     shell: "cd {wildcards.x} && ./analyze.R > results.txt"
