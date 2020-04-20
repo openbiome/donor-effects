@@ -1,70 +1,96 @@
 #!/usr/bin/env Rscript --vanilla
 
 library(tidyverse)
+source("../utils.R")
 
-patients <- read_tsv('data/patients.tsv')
-donations <- read_tsv('data/donations.tsv')
+# Clean data ----------------------------------------------------------
+
+meta <- read_tsv("kump2018.metadata.tsv") %>%
+  filter(DonorID != "Control", Matter == "Donorstool") %>%
+  select(
+    sample = `#SampleID`,
+    patient = PatientID,
+    response = Response,
+    donor = DonorID,
+    timepoint = Sampling_day
+  ) %>%
+  mutate(
+    donor = str_replace(donor, "^D", "donor"),
+    patient = str_replace(patient, "^P", "patient"),
+    timepoint = str_replace(timepoint, "^d", "day"),
+    response = recode(response, NR = "no_response", PR = "partial_response", RE = "remission")
+  )
+
+patients <- meta %>%
+  select(patient, response) %>%
+  distinct() %>%
+  arrange(patient)
+
+raw_diversity_data <- read_tsv("diversity-data/alpha-diversity.tsv") %>%
+  set_names(c("sample_id", "diversity")) %>%
+  separate(sample_id, c("patient", "donor", "timepoint"))
+
+donations <- meta %>%
+  left_join(raw_diversity_data, by = c("patient", "donor", "timepoint")) %>%
+  select(donor, patient, timepoint, diversity)
 
 patients
 donations
 
 # Make sure we have the same counts as the original publication -------
+
 expected_counts <- tibble(
-  response = c('no_response', 'remission'),
+  response = c("no_response", "remission"),
   n = c(12L, 16L)
 )
 
 actual_counts <- patients %>%
-  filter(response != 'partial_response') %>%
-  left_join(donations, by = 'patient') %>%
+  filter(response != "partial_response") %>%
+  left_join(donations, by = "patient") %>%
   count(response)
 
 stopifnot(all_equal(expected_counts, actual_counts))
 
 
-cat("\nCounts of donors and patients ---------------------------------------")
-
+telegraph("Counts of donors and patients")
 cat(str_glue("There are {length(unique(donations$donor))} donors\n\n"))
 cat("Counts of patients who received FMT, by outcome:\n")
 count(patients, response)
 
-
-cat("\n\nTest of response by donation diversity ----------------------------------\n")
+telegraph("Test of response by donation diversity")
 
 donors <- donations %>%
   group_by(donor, patient) %>%
-  summarize_at('diversity', mean)
+  summarize_at("diversity", mean)
 
 data <- patients %>%
-  left_join(donors, by = 'patient')
+  left_join(donors, by = "patient")
 
 cat("NR-RE\n")
 data %>%
-  filter(response %in% c('no_response', 'remission')) %>%
+  filter(response %in% c("no_response", "remission")) %>%
   wilcox.test(diversity ~ response, data = ., conf.int = TRUE)
 
 cat("NR-PR\n")
 data %>%
-  filter(response %in% c('no_response', 'partial_response')) %>%
+  filter(response %in% c("no_response", "partial_response")) %>%
   wilcox.test(diversity ~ response, data = ., conf.int = TRUE)
 
 cat("PR-RE\n")
 data %>%
-  filter(response %in% c('partial_response', 'remission')) %>%
+  filter(response %in% c("partial_response", "remission")) %>%
   wilcox.test(diversity ~ response, data = ., conf.int = TRUE)
 
 
-cat("\n\nModel of response, predicting by diversity ----------------------\n")
+telegraph("Model of response, predicting by diversity")
 
 model_data <- data %>%
-  filter(response %in% c('remission', 'no_response')) %>%
+  filter(response %in% c("remission", "no_response")) %>%
   mutate(y = recode(response, no_response = 0, remission = 1))
 
-model <- glm(y ~ diversity, data = model_data, family = 'binomial')
+model <- glm(y ~ diversity, data = model_data, family = "binomial")
 
 summary(model)
-
-invlogit <- function(lo) exp(lo) / (1 + exp(lo))
 
 tibble(
   diversity = range(model_data$diversity),
@@ -74,7 +100,7 @@ tibble(
   cil = fit - 1.96 * se,
   ciu = fit + 1.96 * se
 ) %>%
-  mutate_at(c('fit', 'cil', 'ciu'), invlogit)
+  mutate_at(c("fit", "cil", "ciu"), invlogit)
 
 
 # Plot of diversities by outcome --------------------------------------
@@ -90,17 +116,14 @@ plot <- data %>%
   ) +
   scale_x_discrete(
     "",
-    breaks = c('no_response', 'partial_response', 'remission'),
-    labels = c('No\nresponse', 'Partial\nresponse', 'Remission')
+    breaks = c("no_response", "partial_response", "remission"),
+    labels = c("No\nresponse", "Partial\nresponse", "Remission")
   ) +
   theme_classic() +
   theme(
-    panel.grid.major.x = element_line(color = 'gray'),
-    axis.text.x = element_text(size = 10, color = 'black'),
-    axis.text.y = element_text(size = 8, color = 'black')
+    panel.grid.major.x = element_line(color = "gray"),
+    axis.text.x = element_text(size = 10, color = "black"),
+    axis.text.y = element_text(size = 8, color = "black")
   )
 
-ggsave(
-  'diversity-by-response.pdf', plot = plot,
-  height = 3, width = 4, units = 'in'
-)
+ggsave("plot.pdf", height = 3, width = 4, units = "in")

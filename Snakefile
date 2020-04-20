@@ -8,10 +8,15 @@ subworkflow goyal_workflow:
     snakefile: "16S.snakefile"
     configfile: "goyal/diversity-data/config.yaml"
 
+subworkflow kump_workflow:
+    workdir: "kump/diversity-data"
+    snakefile: "16S.snakefile"
+    configfile: "kump/diversity-data/config.yaml"
+
 rule all:
     input:
-        expand("{x}/results.txt", x=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal"]),
-        expand("{x}/plot.pdf", x=["jacob"])
+        expand("{x}/results.txt", x=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal", "kump"]),
+        expand("{x}/plot.pdf", x=["jacob", "kump"])
 
 rule simple:
     wildcard_constraints: x="(rossen|moayyedi)"
@@ -40,3 +45,11 @@ rule goyal:
         goyal_workflow("alpha-diversity.tsv"),
         script="goyal/analyze.R"
     shell: "cd goyal && ./analyze.R > results.txt"
+
+rule kump:
+    output: "kump/results.txt", "kump/plot.pdf"
+    input:
+        "utils.R", "kump/kump2018.metadata.tsv",
+        kump_workflow("alpha-diversity.tsv"),
+        script="kump/analyze.R"
+    shell: "cd kump && ./analyze.R > results.txt"
