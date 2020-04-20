@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript --vanilla
 
 library(tidyverse)
+source("../utils.R")
 
 # Read the diversity file produced by Qiime
 raw <- read_tsv('diversity-data/alpha-diversity.tsv', skip = 1, col_names = c('sample_id', 'diversity'))

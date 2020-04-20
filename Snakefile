@@ -3,9 +3,14 @@ subworkflow jacob_workflow:
     snakefile: "16S.snakefile"
     configfile: "jacob/diversity-data/config.yaml"
 
+subworkflow goyal_workflow:
+    workdir: "goyal/diversity-data"
+    snakefile: "16S.snakefile"
+    configfile: "goyal/diversity-data/config.yaml"
+
 rule all:
     input:
-        expand("{x}/results.txt", x=["rossen", "moayyedi", "paramsothy", "costello", "jacob"]),
+        expand("{x}/results.txt", x=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal"]),
         expand("{x}/plot.pdf", x=["jacob"])
 
 rule simple:
@@ -21,9 +26,17 @@ rule simple_with_data:
     shell: "cd {wildcards.x} && ./analyze.R > results.txt"
 
 rule jacob:
-    output: text="jacob/results.txt", plot="jacob/plot.pdf"
+    output: "jacob/results.txt", "jacob/plot.pdf"
     input:
         "utils.R", "jacob/patient-data.tsv",
         jacob_workflow("alpha-diversity.tsv"),
         script="jacob/analyze.R"
     shell: "cd jacob && ./analyze.R > results.txt"
+
+rule goyal:
+    output: "goyal/results.txt"
+    input:
+        "utils.R", "goyal/patient-data.tsv",
+        goyal_workflow("alpha-diversity.tsv"),
+        script="goyal/analyze.R"
+    shell: "cd goyal && ./analyze.R > results.txt"
