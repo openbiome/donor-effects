@@ -23,7 +23,7 @@ n_explore_flips <- 4
 n_total_flips <- 38
 flip_p <- (7 + 2) / (18 + 20) # probability of "heads" = positive patient outcome
 alpha <- 0.05
-n_iter <- 1e4
+n_iter <- 1e5
 
 max_n_flips <- n_total_flips - (n_donors - 1) * n_explore_flips
 stopifnot(max_n_flips > 0)

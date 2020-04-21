@@ -30,7 +30,7 @@ manifest <- filereport %>%
   )
 
 samples <- filereport %>%
-  select(filepath, url, fastq_md5)
+  select(filepath, url, md5 = fastq_md5)
 
 write_csv(manifest, opts$manifest)
 write_csv(samples, opts$samples)

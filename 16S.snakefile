@@ -29,6 +29,20 @@ def minimum_depth(fn):
 
 # Rules ---------------------------------------------------------------
 
+rule export_beta:
+    output: "distance-matrix.tsv"
+    input: "distance-matrix.qza"
+    shell: "qiime tools export --input-path {input} --output-path ."
+
+rule beta:
+    output: "distance-matrix.qza"
+    input: "rarefied-table.qza"
+    shell:
+        "qiime diversity beta"
+        " --i-table {input}"
+        " --o-distance-matrix {output}"
+        " --p-metric braycurtis"
+
 rule export_diversity:
     output:
         "alpha-diversity.tsv"
@@ -167,6 +181,7 @@ rule download:
         assert len(row) == 1
         row = row[0]
 
+        print(row)
         download(row["url"], row["filepath"], row["md5"])
 
 checkpoint manifest:
