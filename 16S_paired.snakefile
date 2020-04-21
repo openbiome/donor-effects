@@ -54,7 +54,7 @@ rule paired_demultiplex:
         manifest = "manifest.csv"
     shell:
         "qiime tools import"
-        " --type 'SampleData[PairedEndSequencesWithQuality']"
+        " --type 'SampleData[PairedEndSequencesWithQuality]'"
         " --input-path {input.manifest}"
         " --input-format PairedEndFastqManifestPhred33"
         " --output-path {output}"
