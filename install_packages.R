@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript --vanilla
+#!/usr/bin/env Rscript
 
 options(repos = c(CRAN = "https://cran.rstudio.com/"))
 

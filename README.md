@@ -24,5 +24,5 @@ Author: Scott Olesen <scott@openbiome.org>
 ## Getting started
 
 1. Install Qiime 2 (version 2019.10) and active the environment ([instructions](https://docs.qiime2.org/2019.10/install/native/))
-2. Install R packages using `./install_packages.R`
-3. Run `snakemake`
+1. Install R packages using `./install_packages.R`
+1. Run `snakemake`
