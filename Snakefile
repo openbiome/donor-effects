@@ -2,19 +2,18 @@ STUDIES=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal", "kump
 
 subworkflow jacob_workflow:
     workdir: "jacob/diversity-data/"
-    snakefile: "16S.snakefile"
-    # snakefile: "jacob/diversity-data/Snakefile"
+    snakefile: "16S_paired.snakefile"
     configfile: "jacob/diversity-data/config.yaml"
-
-subworkflow goyal_workflow:
-    workdir: "goyal/diversity-data"
-    snakefile: "16S.snakefile"
-    configfile: "goyal/diversity-data/config.yaml"
 
 subworkflow kump_workflow:
     workdir: "kump/diversity-data"
-    snakefile: "16S.snakefile"
+    snakefile: "16S_paired.snakefile"
     configfile: "kump/diversity-data/config.yaml"
+
+subworkflow goyal_workflow:
+    workdir: "goyal/diversity-data"
+    snakefile: "16S_single.snakefile"
+    configfile: "goyal/diversity-data/config.yaml"
 
 rule all:
     input:
