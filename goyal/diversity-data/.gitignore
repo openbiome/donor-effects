@@ -1,6 +1,0 @@
-.snakemake
-*.qza
-*.csv
-*.tsv
-*.txt
-*.log

@@ -1,3 +1,10 @@
+.snakemake
 private/
+*.biom
+*.csv
+*.log
+*.fastq.gz
 *.pdf
+*.qza
+*.tsv
 *.txt

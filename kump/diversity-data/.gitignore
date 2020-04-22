@@ -1,7 +1,0 @@
-.snakemake
-*.csv
-*.tsv
-*.qza
-*.log
-*.txt
-*.biom
