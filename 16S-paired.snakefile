@@ -1,6 +1,6 @@
 # Paired end read processing
 
-include: "16S_common.snakefile"
+include: "16S-common.snakefile"
 
 rule paired_denoise:
     output:

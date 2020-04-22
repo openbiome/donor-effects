@@ -1,6 +1,6 @@
 # Single-end reads
 
-include: "16S_common.snakefile"
+include: "16S-common.snakefile"
 
 rule single_denoise:
     output:
