@@ -24,7 +24,8 @@ rule clean:
     shell:
         "find . -name '*.pdf' -delete"
         " && find . -name '*.fastq.gz' -delete"
-        " && find . -name '*.txt' -delete"
+        " && find . -name '*/*.txt' -delete"
+        " && find . -name '*.csv' -delete"
         " && find . -path '*/diversity-data/*.qza' -delete"
         " && find . -path '*/diversity-data/*.log' -delete"
         " && find . -path '*/diversity-data/*.tsv' -delete"
