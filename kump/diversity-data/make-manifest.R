@@ -23,7 +23,7 @@ meta <- read_tsv(opts$metadata) %>%
   ) %>%
   select(sample_alias = `#SampleID`, sample_id)
 
-raw_filereport <- read_tsv(options$filereport)
+raw_filereport <- read_tsv(opts$filereport)
 
 filereport <- meta %>%
   left_join(raw_filereport, by = "sample_alias") %>%
