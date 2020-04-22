@@ -5,8 +5,9 @@ Author: Scott Olesen <scott@openbiome.org>
 ## Files
 
 - `README.md`: This file
+- `donor-effects-env.txt`: Conda environment file
 - `install-packages.R`: R script that installs packages needed for analyses
-- `Snakefile`: A [Snakemake](https://snakemake.readthedocs.io/en/stable/) file with instructions for how to repeat the analyses
+- `Snakefile`: A [Snakemake](https://snakemake.readthedocs.io/) file with instructions for how to repeat the analyses
 - `16S-common.snakefile`: A Snakemake file with instructions for 16S rRNA data processing
 - `16S-single.snakefile`: 16S processing for single-ended reads (Goyal *et al*.)
 - `16S-paired.snakefile`: 16S processing for paired-ended reads (Jacob *et al*. and Kump *et al*.)
@@ -23,6 +24,7 @@ Author: Scott Olesen <scott@openbiome.org>
 
 ## Getting started
 
-1. Install Qiime 2 (version 2019.10) and active the environment ([instructions](https://docs.qiime2.org/2019.10/install/native/))
-1. Install R packages using `./install-packages.R`
-1. Run `snakemake`
+1. Install [conda](https://docs.conda.io/)
+1. Install the working environment (Qiime and Snakemake): `conda env create --file donor-effects-envs.txt`
+1. Install R packages using `./install-packages.R` into that environment
+1. Run `snakemake` in that environment
