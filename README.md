@@ -25,6 +25,6 @@ Author: Scott Olesen <scott@openbiome.org>
 ## Getting started
 
 1. Install [conda](https://docs.conda.io/)
-1. Install the working environment (Qiime and Snakemake): `conda env create --file donor-effects-envs.txt`
+1. Install the working environment (Qiime and Snakemake): `conda create --name donor-effects --file env.txt`
 1. Install R packages using `./install-packages.R` into that environment
 1. Run `snakemake` in that environment
