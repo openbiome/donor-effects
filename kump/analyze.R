@@ -26,6 +26,8 @@ patients <- meta %>%
   distinct() %>%
   arrange(patient)
 
+cat(str_glue("\n\nNumber of patients with donor samples: {nrow(patients)}\n\n"))
+
 raw_diversity_data <- read_tsv("diversity-data/alpha-diversity.tsv") %>%
   set_names(c("sample_id", "diversity")) %>%
   separate(sample_id, c("patient", "donor", "timepoint"))
@@ -34,10 +36,7 @@ donations <- meta %>%
   left_join(raw_diversity_data, by = c("patient", "donor", "timepoint")) %>%
   select(donor, patient, timepoint, diversity)
 
-patients
-donations
-
-# Make sure we have the same counts as the original publication -------
+# Make sure we have the same counts as the original publication --------
 
 expected_counts <- tibble(
   response = c("no_response", "remission"),

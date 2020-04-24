@@ -12,10 +12,15 @@ option_list <- list(
 
 opts <- parse_args(OptionParser(option_list = option_list))
 
+# donor samples of the form FMT.01.123.D, where "123" is the patient ID
+patient_regex <- regex("^FMT\\.0[13]\\.(\\d{3})\\.D1?$")
+
 filereport <- read_tsv(opts$filereport) %>%
   # keep only donor samples
-  filter(str_detect(library_name, "\\.D\\d?$")) %>%
+  filter(str_detect(library_name, patient_regex)) %>%
+  mutate(patient_id = as.numeric(str_match(library_name, patient_regex)[, 2])) %>%
   mutate(
+    sample_id = sprintf("patient%02i", patient_id),
     url = str_c("ftp://", fastq_ftp),
     filepath = str_c("fastq/", run_accession, ".fastq.gz"),
     absolute_filepath = str_c("$PWD/", filepath)
@@ -24,7 +29,7 @@ filereport <- read_tsv(opts$filereport) %>%
 manifest <- filereport %>%
   mutate(direction = "forward") %>%
   select(
-    `sample-id` = library_name,
+    `sample-id` = sample_id,
     `absolute-filepath` = absolute_filepath,
     direction
   )

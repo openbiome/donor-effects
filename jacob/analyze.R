@@ -6,7 +6,12 @@ library(tidyverse)
 library(scales)
 source("../utils.R")
 
+n_patients <- 20
+
 patient_data <- read_tsv("patient-data.tsv")
+
+# check that the number of patients is what's reported in the paper
+stopifnot(nrow(patient_data) == n_patients)
 
 # Table tests and GLM -------------------------------------------------
 
@@ -51,7 +56,7 @@ donorwise <- patient_data %>%
   )
 
 # check that each 2x2 table has the right number of counts
-stopifnot(all(donorwise$n_patients == nrow(patient_data)))
+stopifnot(all(donorwise$n_patients == n_patients))
 
 donorwise %>%
   select(donor, test_p)
@@ -68,6 +73,8 @@ print(effect_sizes(model))
 raw_diversity_data <- read_tsv("diversity-data/alpha-diversity.tsv") %>%
   set_names(c("patient_id", "diversity")) %>%
   mutate_at("patient_id", ~ as.integer(str_match(., "patient(\\d+)")[, 2]))
+
+stopifnot(nrow(raw_diversity_data) == n_patients)
 
 diversity_data <- patient_data %>%
   left_join(raw_diversity_data, by = "patient_id") %>%
