@@ -60,7 +60,10 @@ telegraph("Test of response by donation diversity")
 
 donors <- donations %>%
   group_by(donor, patient) %>%
-  summarize_at("diversity", mean)
+  summarize(
+    n_samples = n(),
+    diversity = mean(diversity)
+  )
 
 data <- patients %>%
   left_join(donors, by = "patient")

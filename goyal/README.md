@@ -1,9 +1,9 @@
 # Re-analysis of Goyal et al.
 
-- `data/` contains the raw sequencing data
-    - `Snakefile` downloads, processes, and analyses the 16S data
+- `diversity-data/` contains the raw sequencing data
     - `make-manifest.R` gets the Qiime 2 manifest file
 - `analysis.R` performs the analysis on `data.tsv` and `patients.tsv`
-- `clean.R` cleans that data from the `data/` folder
-- `data.tsv` is the cleaned data made by `clean.R`
-- `patients.tsv` records the outcomes (0/1) of each patient
+- `patient-data.tsv` records the outcomes (0/1) of each patient
+
+In two cases (patients #24 and #29), the donor has two associated samples. Here
+we used just the first sample (`D1`).
