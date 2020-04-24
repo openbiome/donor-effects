@@ -18,7 +18,7 @@ subworkflow goyal_workflow:
 rule all:
     input:
         expand("{x}/results.txt", x=STUDIES),
-        expand("{x}/plot.pdf", x=["jacob", "kump"])
+        expand("{x}/plot.pdf", x=["goyal", "jacob", "kump"])
 
 rule clean:
     shell:

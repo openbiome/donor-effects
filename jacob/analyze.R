@@ -4,6 +4,7 @@ library(exact2x2)
 library(lme4)
 library(tidyverse)
 library(scales)
+library(patchwork)
 source("../utils.R")
 
 n_patients <- 20
@@ -112,25 +113,50 @@ tibble(
 
 # Make the figure -----------------------------------------------------
 
-plot <- diversity_data %>%
+alpha_plot <- diversity_data %>%
   ggplot(aes(factor(outcome), diversity)) +
   geom_boxplot(width = 0.5, outlier.shape = NA) +
   geom_point(shape = 1, size = 3) +
   scale_x_discrete(
     "",
     breaks = c(0, 1),
-    labels = c("No remission", "Remission")
+    labels = c("No response", "Response")
   ) +
   scale_y_continuous(
-    "Diversity (number of ASVs)",
-    limits = c(0, 500),
+    "Diversity (Shannon)",
+    limits = c(3.5, 6),
     expand = c(0, 0)
   ) +
-  theme_classic() +
+  cowplot::theme_half_open()
+
+telegraph("PERMANOVA")
+
+distance_matrix <- read_tsv("diversity-data/distance-matrix.tsv")
+sample_ids <- sprintf("patient%02i", patient_data$patient)
+
+results <- permanova(distance_matrix, sample_ids, patient_data$outcome)
+
+results$test
+
+beta_plot <- results$mds %>%
+  ggplot(aes(coord1, coord2, color = factor(outcome))) +
+  geom_point(shape = 1, size = 3, stroke = 1) +
+  scale_color_manual(
+    "Outcome",
+    breaks = c(0, 1),
+    labels = c("No response", "Response"),
+    values = c("#d7191c", "#2c7bb6")
+  ) +
+  labs(x = "coordinate 1", y = "coordinate 2") +
+  cowplot::theme_half_open() +
   theme(
-    panel.grid.major.x = element_line(color = "gray"),
-    axis.text.x = element_text(size = 10, color = "black"),
-    axis.text.y = element_text(size = 8, color = "black")
+    legend.position = "top"
   )
 
-ggsave("plot.pdf", height = 3, width = 4, units = "in")
+# Assemble the two-part plot ------------------------------------------
+
+plot <- alpha_plot + beta_plot +
+  plot_layout(widths = c(1, 1.5)) +
+  plot_annotation(tag_level = "a")
+
+ggsave("plot.pdf", width = 19, units = "cm")

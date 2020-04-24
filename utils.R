@@ -44,3 +44,29 @@ effect_sizes <- function(model, by = "pool", accuracy = 0, alpha = 0.1) {
     effect_size_ciu = show(effect_size_ciu)
   )
 }
+
+# PERMANOVA utility
+
+permanova <- function(distance_matrix, patient_ids, outcomes) {
+  stopifnot(all(distance_matrix$X1 == names(distance_matrix)[-1]))
+
+  idx <- match(patient_ids, distance_matrix$X1)
+  stopifnot(all(distance_matrix$X1[idx] == patient_ids))
+
+  Y <- distance_matrix %>%
+    select(-X1) %>%
+    as.matrix() %>%
+    { .[idx, idx] } %>%
+    as.dist()
+
+  test <- vegan::adonis(Y ~ outcomes)
+
+  mds <- Y %>%
+    MASS::isoMDS(k = 2) %>%
+    `[[`("points") %>%
+    `colnames<-`(c("coord1", "coord2")) %>%
+    as_tibble(rownames = "sample_id") %>%
+    mutate(patient_id = patient_ids, outcome = outcomes)
+
+  list(test = test, p = test$aov.tab$`Pr(>F)`[1], mds = mds)
+}
