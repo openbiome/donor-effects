@@ -59,6 +59,7 @@ rule jacob:
     input:
         "utils.R", "jacob/patient-data.tsv",
         jacob_workflow("alpha-diversity.tsv"),
+        jacob_workflow("distance-matrix.tsv"),
         script="jacob/analyze.R"
     shell: "cd jacob && ./analyze.R > results.txt"
 
@@ -67,6 +68,7 @@ rule goyal:
     input:
         "utils.R", "goyal/patient-data.tsv",
         goyal_workflow("alpha-diversity.tsv"),
+        goyal_workflow("distance-matrix.tsv"),
         script="goyal/analyze.R"
     shell: "cd goyal && ./analyze.R > results.txt"
 
@@ -75,5 +77,6 @@ rule kump:
     input:
         "utils.R", "kump/kump2018.metadata.tsv",
         kump_workflow("alpha-diversity.tsv"),
+        kump_workflow("distance-matrix.tsv"),
         script="kump/analyze.R"
     shell: "cd kump && ./analyze.R > results.txt"
