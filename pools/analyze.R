@@ -29,7 +29,8 @@ paramsothy <- paramsothy %>% mutate(pool = pools)
 costello <- read_tsv("../costello/patient-data.tsv") %>%
   filter(fmt == 1)
 
-jacob <- read_tsv("../jacob/patient-data.tsv")
+jacob <- read_tsv("../jacob/patient-data.tsv") %>%
+  mutate_at("patient", as.character)
 
 # Makre sure pools in different studies have the same names
 data <- bind_rows(paramsothy, costello, jacob, .id = "study") %>%

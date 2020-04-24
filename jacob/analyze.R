@@ -71,13 +71,13 @@ print(effect_sizes(model))
 # Diversity model -----------------------------------------------------
 
 raw_diversity_data <- read_tsv("diversity-data/alpha-diversity.tsv") %>%
-  set_names(c("patient_id", "diversity")) %>%
-  mutate_at("patient_id", ~ as.integer(str_match(., "patient(\\d+)")[, 2]))
+  set_names(c("patient", "diversity")) %>%
+  mutate_at("patient", ~ as.integer(str_replace(., "^patient", "")))
 
 stopifnot(nrow(raw_diversity_data) == n_patients)
 
 diversity_data <- patient_data %>%
-  left_join(raw_diversity_data, by = "patient_id") %>%
+  left_join(raw_diversity_data, by = "patient") %>%
   filter(!is.na(diversity))
 
 print(diversity_data)
