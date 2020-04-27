@@ -71,6 +71,9 @@ donors <- donations %>%
 data <- patients %>%
   left_join(donors, by = "patient")
 
+cat("Omnibus test\n")
+with(data, { kruskal.test(diversity, response) })
+
 cat("NR-RE\n")
 data %>%
   filter(response %in% c("no_response", "remission")) %>%
