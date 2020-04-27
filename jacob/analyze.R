@@ -17,20 +17,26 @@ stopifnot(nrow(patient_data) == n_patients)
 # Table tests and GLM -------------------------------------------------
 
 telegraph("2xP test of pools")
-pool_test <- patient_data %>%
+pool_table <- patient_data %>%
   group_by(pool) %>%
   summarize(
     total = n(),
     success = sum(outcome),
     fail = total - success
   ) %>%
-  select(success, fail) %>%
-  as.matrix() %T>%
-  # check that table counts add up to number of patients
-  { stopifnot(sum(.) == nrow(patient_data)) } %>%
-  fisher.test()
+  arrange(desc(success / total)) %>%
+  {
+    x <- as.matrix(select(., success, fail))
+    rownames(x) <- .$pool
+    x
+  }
 
-pool_test
+# check that table counts add up to number of patients
+stopifnot(sum(pool_table) == nrow(patient_data))
+
+pool_table
+
+fisher.test(pool_table)
 
 telegraph("2x2 tests of donors")
 
@@ -38,7 +44,7 @@ total_success <- sum(patient_data$outcome)
 total_fail <- sum(!patient_data$outcome)
 
 donorwise <- patient_data %>%
-  tidyr::gather("donor", "donor_present", starts_with("donor")) %>%
+  gather("donor", "donor_present", starts_with("donor")) %>%
   filter(donor_present == 1) %>%
   group_by(donor) %>%
   summarize(

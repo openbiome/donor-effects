@@ -114,7 +114,6 @@ tibble(
 
 alpha_plot <- data %>%
   ggplot(aes(response, diversity)) +
-  geom_boxplot(width = 0.5, outlier.shape = NA) +
   geom_point(shape = 1, size = 3) +
   scale_y_continuous(
     "Diversity (Shannon)",
