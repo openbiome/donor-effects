@@ -15,22 +15,47 @@ paper_data <- c(14, 38 - 14, 7, 40 - 7) %>%
 exact2x2(paper_data, midp = TRUE)
 
 # Read in the full data
-raw_data <- read_tsv("patient-data.tsv", col_types = cols(patient = "c", treatment = "c", .default = "i"))
+patient_data <- read_tsv("patient-data.tsv") %>%
+  filter(treatment != "no_rescue")
 
-# Check that the last donor is "M"
-stopifnot(last(names(raw_data)) == "M")
+total_patients <- nrow(patient_data)
+total_success <- sum(patient_data$outcome)
+total_fail <- total_patients - total_success
 
-data <- raw_data %>%
-  filter(treatment != "no_rescue") %>%
-  # combine columns A through M into a single column "pool"
+# Data by donor
+
+donor_data <- patient_data %>%
+  gather("donor", "present", A:M) %>%
+  filter(present == 1) %>%
+  group_by(donor) %>%
+  summarize(
+    n = n(),
+    success = sum(outcome),
+    fail = n - success,
+    other_success = total_success - success,
+    other_fail = total_fail - fail
+  ) %>%
+  mutate(
+    x = pmap(list(success, fail, other_success, other_fail), c),
+    contingency_table = map(x, ~ matrix(., nrow = 2)),
+    test = map(contingency_table, ~ exact2x2(., midp = TRUE)),
+    p_value = map_dbl(test, ~ .$p.value),
+    fdr = p.adjust(p_value, "BH"),
+    bonferroni_p = p.adjust(p_value)
+  )
+
+donor_data %>%
+  select(donor, success, fail, p_value, fdr, bonferroni_p)
+
+# Data by pool
+# Combine columns A through M into a single column "pool"
+
+pool_data <- patient_data %>%
   unite("pool", A:M)
-
-n_patients <- nrow(data)
-n_success <- sum(data$outcome)
 
 telegraph("Omnibus test of variance in efficacy by pool")
 
-data %>%
+pool_data %>%
   group_by(pool) %>%
   summarize(
     success = sum(outcome),
@@ -40,10 +65,9 @@ data %>%
   as.matrix() %>%
   fisher.test()
 
-
 telegraph("Mixed model of efficacy with random pool effect")
 
-model <- glmer(outcome ~ (1 | pool), family = "binomial", data = data)
+model <- glmer(outcome ~ (1 | pool), family = "binomial", data = pool_data)
 summary(model)
 
 telegraph("Typical deviations")
