@@ -63,7 +63,7 @@ beta_plot <- results$mds %>%
   scale_color_manual(
     "Outcome",
     breaks = c(0, 1),
-    labels = c("No response", "Response"),
+    labels = c("No remission", "Remission"),
     values = c("#d7191c", "#2c7bb6")
   ) +
   labs(x = "coordinate 1", y = "coordinate 2") +

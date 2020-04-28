@@ -96,7 +96,7 @@ alpha_plot <- data %>%
   geom_point(shape = 1, size = 3) +
   scale_y_continuous(
     "Diversity (Shannon)",
-    limits = c(5, 7),
+    limits = c(3, 7.25),
     expand = c(0, 0)
   ) +
   scale_x_discrete(
