@@ -32,24 +32,6 @@ data %>%
 telegraph("Wilcoxon of patients' diversity by outcome")
 wilcox.test(diversity ~ outcome, data = data, conf.int = TRUE)
 
-telegraph("Model of patients by outcome")
-model <- glm(outcome ~ diversity, data = data, family = "binomial")
-summary(model)
-
-telegraph("Model predictions for extreme diversities")
-
-tibble(
-  extreme = c("min observed diversity", "max observed diversity"),
-  diversity = c(min(data$diversity), max(data$diversity)),
-  pred = map(diversity, ~ predict(model, newdata = tibble(diversity = .), se.fit = TRUE)),
-  fit = map_dbl(pred, ~ .$fit),
-  se = map_dbl(pred, ~ .$se),
-  cil = fit - 1.96 * se,
-  ciu = fit + 1.96 * se
-) %>%
-  mutate_at(c("fit", "cil", "ciu"), invlogit) %>%
-  select(extreme, diversity, fit, cil, ciu)
-
 alpha_plot <- data %>%
   ggplot(aes(factor(outcome), diversity)) +
   geom_boxplot(width = 0.5, outlier.shape = NA) +

@@ -89,27 +89,6 @@ data %>%
   filter(response %in% c("partial_response", "remission")) %>%
   wilcox.test(diversity ~ response, data = ., conf.int = TRUE)
 
-
-telegraph("Model of response, predicting by diversity")
-
-model_data <- data %>%
-  filter(response %in% c("remission", "no_response")) %>%
-  mutate(y = recode(response, no_response = 0, remission = 1))
-
-model <- glm(y ~ diversity, data = model_data, family = "binomial")
-
-summary(model)
-
-tibble(
-  diversity = range(model_data$diversity),
-  pred = map(diversity, ~ predict(model, newdata = tibble(diversity = .), se.fit = TRUE)),
-  fit = map_dbl(pred, ~ .$fit),
-  se = map_dbl(pred, ~.$se),
-  cil = fit - 1.96 * se,
-  ciu = fit + 1.96 * se
-) %>%
-  mutate_at(c("fit", "cil", "ciu"), invlogit)
-
 # Plot of diversities by outcome --------------------------------------
 
 alpha_plot <- data %>%

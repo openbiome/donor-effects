@@ -76,6 +76,7 @@ summary(model)
 print(effect_sizes(model))
 
 # Diversity model -----------------------------------------------------
+telegraph("Wilcox test on diversity data")
 
 raw_diversity_data <- read_tsv("diversity-data/alpha-diversity.tsv") %>%
   set_names(c("patient", "diversity")) %>%
@@ -87,35 +88,7 @@ diversity_data <- patient_data %>%
   left_join(raw_diversity_data, by = "patient") %>%
   filter(!is.na(diversity))
 
-print(diversity_data)
-
-telegraph("Distribution of diversities by patient outcomes")
-diversity_data %>%
-  group_by(outcome) %>%
-  summarize(
-    n = n(),
-    mean_diversity = mean(diversity),
-    sem_diversity = sd(diversity) / sqrt(n)
-  )
-
-telegraph("Wilcox test on diversity data")
 wilcox.test(diversity ~ outcome, data = diversity_data, conf.int = TRUE)
-
-telegraph("Logisitic regression")
-invlogit <- function(lo) exp(lo) / (1 + exp(lo))
-
-model <- glm(outcome ~ diversity, family = "binomial", data = diversity_data)
-summary(model)
-
-tibble(
-  diversity = range(diversity_data$diversity),
-  pred = map(diversity, ~ predict(model, newdata = tibble(diversity = .), se.fit = TRUE)),
-  fit = map_dbl(pred, ~ .$fit),
-  se = map_dbl(pred, ~.$se),
-  cil = fit - 1.96 * se,
-  ciu = fit + 1.96 * se
-) %>%
-  mutate_at(c("fit", "cil", "ciu"), invlogit)
 
 # Make the figure -----------------------------------------------------
 
