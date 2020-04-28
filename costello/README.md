@@ -1,6 +1,6 @@
 # Re-analysis for Costello et al.
 
-`data.tsv` has columns:
+`patient-data.tsv` has columns:
 
 - `patient`: a random, unique identifier for each patient
 - `outcome`: 0/1 for whether the patient met the primary clinical endpoint

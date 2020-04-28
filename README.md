@@ -22,6 +22,10 @@ Author: Scott Olesen <scott@openbiome.org>
 - `rossen/`: Re-analysis of Rossen *et al*.
 - `utils.R`: Utilities for R scripts
 
+Goyal, Jacob, and Kump have subfolders `diversity-data/`, which are the
+workspaces for the 16S Snakefiles. The alpha- and beta-diversity results are
+placed there.
+
 ## Getting started
 
 1. Install [conda](https://docs.conda.io/)
