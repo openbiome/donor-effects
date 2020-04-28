@@ -11,10 +11,10 @@ paramsothy <- read_tsv(
   "../paramsothy/patient-data.tsv",
   col_types = cols(patient = "c", treatment = "c", .default = "i")
 ) %>%
-  filter(treatment != "no_rescue")
+  filter(arm != "placebo")
 
 # get all columns, starting at A until the end
-donors <- names(paramsothy) %>% { .[match("A", .):length(.)] }
+donors <- names(paramsothy) %>% { .[str_detect(., "^donor")] }
 
 # Add pool identifiers
 pools <- paramsothy %>%

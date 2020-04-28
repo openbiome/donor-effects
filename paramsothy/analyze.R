@@ -16,7 +16,7 @@ exact2x2(paper_data, midp = TRUE)
 
 # Read in the full data
 patient_data <- read_tsv("patient-data.tsv") %>%
-  filter(treatment != "no_rescue")
+  filter(arm != "placebo")
 
 total_patients <- nrow(patient_data)
 total_success <- sum(patient_data$outcome)
@@ -25,7 +25,7 @@ total_fail <- total_patients - total_success
 # Data by donor
 
 donor_data <- patient_data %>%
-  gather("donor", "present", A:M) %>%
+  gather("donor", "present", donor01:donor14) %>%
   filter(present == 1) %>%
   group_by(donor) %>%
   summarize(
@@ -48,20 +48,24 @@ donor_data %>%
   select(donor, success, fail, p_value, fdr, bonferroni_p)
 
 # Data by pool
-# Combine columns A through M into a single column "pool"
+# Combine donors columns into a single column "pool"
 
 pool_data <- patient_data %>%
-  unite("pool", A:M)
+  unite("pool", donor01:donor14)
 
 telegraph("Omnibus test of variance in efficacy by pool")
 
-pool_data %>%
+pool_matrix <- pool_data %>%
   group_by(pool) %>%
   summarize(
     success = sum(outcome),
     fail = n() - success
   ) %>%
-  select(success, fail) %>%
+  select(success, fail)
+
+pool_matrix
+
+pool_matrix %>%
   as.matrix() %>%
   fisher.test()
 
