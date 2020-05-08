@@ -70,3 +70,8 @@ permanova <- function(distance_matrix, patient_ids, outcomes) {
 
   list(test = test, p = test$aov.tab$`Pr(>F)`[1], mds = mds)
 }
+
+# Plotting niceties ---------------------------------------------------
+
+red <- "#d7191c"
+blue <- "#2c7bb6"

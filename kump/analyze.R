@@ -66,7 +66,8 @@ donors <- donations %>%
   summarize(
     n_samples = n(),
     diversity = mean(diversity)
-  )
+  ) %>%
+  ungroup()
 
 data <- patients %>%
   left_join(donors, by = "patient")
@@ -92,7 +93,7 @@ data %>%
 # Plot of diversities by outcome --------------------------------------
 
 alpha_plot <- data %>%
-  ggplot(aes(response, diversity)) +
+  ggplot(aes(response, diversity, color = response)) +
   geom_point(shape = 1, size = 3) +
   scale_y_continuous(
     "Diversity (Shannon)",
@@ -104,7 +105,9 @@ alpha_plot <- data %>%
     breaks = c("no_response", "partial_response", "remission"),
     labels = c("No\nresponse", "Partial\nresponse", "Remission")
   ) +
-  cowplot::theme_half_open()
+  scale_color_manual(values = c(red, "black", blue)) +
+  cowplot::theme_half_open() +
+  theme(legend.position = "none")
 
 # PERMANOVA -----------------------------------------------------------
 
@@ -132,9 +135,10 @@ beta_plot <- results$mds %>%
     "Outcome",
     breaks = c(0, 1),
     labels = c("No response", "Remission"),
-    values = c("#d7191c", "#2c7bb6")
+    values = c(red, blue),
   ) +
   labs(x = "coordinate 1", y = "coordinate 2") +
+  coord_fixed() +
   cowplot::theme_half_open() +
   theme(
     legend.position = "top"
@@ -144,4 +148,4 @@ plot <- alpha_plot + beta_plot +
   plot_layout(widths = c(1, 1.25)) +
   plot_annotation(tag_level = "a")
 
-ggsave("plot.pdf", width = 19, units = "cm")
+ggsave("plot.pdf", width = 19, height = 10, units = "cm")

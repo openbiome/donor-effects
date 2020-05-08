@@ -93,20 +93,23 @@ wilcox.test(diversity ~ outcome, data = diversity_data, conf.int = TRUE)
 # Make the figure -----------------------------------------------------
 
 alpha_plot <- diversity_data %>%
-  ggplot(aes(factor(outcome), diversity)) +
+  mutate_at("outcome", factor) %>%
+  ggplot(aes(outcome, diversity, color = outcome)) +
   geom_boxplot(width = 0.5, outlier.shape = NA) +
   geom_point(shape = 1, size = 3) +
   scale_x_discrete(
     "",
     breaks = c(0, 1),
-    labels = c("No response", "Response")
+    labels = c("No response", "Response"),
   ) +
   scale_y_continuous(
     "Diversity (Shannon)",
     limits = c(3.5, 6),
     expand = c(0, 0)
   ) +
-  cowplot::theme_half_open()
+  scale_color_manual(values = c(red, blue)) +
+  cowplot::theme_half_open() +
+  theme(legend.position = "none")
 
 telegraph("PERMANOVA")
 
@@ -124,13 +127,12 @@ beta_plot <- results$mds %>%
     "Outcome",
     breaks = c(0, 1),
     labels = c("No response", "Response"),
-    values = c("#d7191c", "#2c7bb6")
+    values = c(red, blue)
   ) +
   labs(x = "coordinate 1", y = "coordinate 2") +
+  coord_fixed() +
   cowplot::theme_half_open() +
-  theme(
-    legend.position = "top"
-  )
+  theme(legend.position = "top")
 
 # Assemble the two-part plot ------------------------------------------
 
@@ -138,4 +140,4 @@ plot <- alpha_plot + beta_plot +
   plot_layout(widths = c(1, 1.5)) +
   plot_annotation(tag_level = "a")
 
-ggsave("plot.pdf", width = 19, units = "cm")
+ggsave("plot.pdf", width = 19, height = 10, units = "cm")
