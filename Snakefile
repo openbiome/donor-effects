@@ -1,4 +1,4 @@
-STUDIES=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal", "kump", "nishida", "pools"]
+STUDIES=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal", "kump", "nishida", "uygun", "pools"]
 
 subworkflow jacob_workflow:
     workdir: "jacob/diversity-data/"
@@ -33,7 +33,7 @@ rule clean:
 
 # Three studies have their data embedded in the scripts
 rule simple:
-    wildcard_constraints: x="(rossen|moayyedi|nishida)"
+    wildcard_constraints: x="(rossen|moayyedi|nishida|uygun)"
     output: "{x}/results.txt"
     input: "utils.R", script="{x}/analyze.R"
     shell: "cd {wildcards.x} && ./analyze.R > results.txt"
