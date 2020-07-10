@@ -1,6 +1,6 @@
 # Re-evaluating the evidence for fecal microbiota transplantation "super-donors" in inflammatory bowel diseases
 
-Author: Scott Olesen <scott@openbiome.org>
+Author: Scott Olesen <solesen@openbiome.org>
 
 ## Files
 

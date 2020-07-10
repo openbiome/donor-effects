@@ -1,4 +1,7 @@
-STUDIES=["rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal", "kump", "nishida", "uygun", "vaughn", "pools"]
+STUDIES=[
+    "rossen", "moayyedi", "paramsothy", "costello", "jacob", "goyal", "kump",
+    "nishida", "nusbaum", "uygun", "vaughn", "pools"
+]
 
 subworkflow jacob_workflow:
     workdir: "jacob/diversity-data/"
@@ -14,6 +17,11 @@ subworkflow goyal_workflow:
     workdir: "goyal/diversity-data"
     snakefile: "16S-single.snakefile"
     configfile: "goyal/diversity-data/config.yaml"
+
+subworkflow nusbaum_workflow:
+    workdir: "nusbaum/diversity-data"
+    snakefile: "16S-paired.snakefile"
+    configfile: "nusbaum/diversity-data/config.yaml"
 
 rule all:
     input:
@@ -53,7 +61,7 @@ rule pools:
         expand("{x}/patient-data.tsv", x=["paramsothy", "costello", "jacob"])
     shell: "cd pools && ./analyze.R > results.txt"
 
-# The three microbiome
+# The microbiome studies
 rule jacob:
     output: "jacob/results.txt", "jacob/plot.pdf"
     input:
@@ -80,3 +88,12 @@ rule kump:
         kump_workflow("distance-matrix.tsv"),
         script="kump/analyze.R"
     shell: "cd kump && ./analyze.R > results.txt"
+
+rule nusbaum:
+    output: "nusbaum/results.txt", "nusbaum/plot.pdf"
+    input:
+        "utils.R", "nusbaum/new_mapping_file.txt",
+        nusbaum_workflow("alpha-diversity.tsv"),
+        nusbaum_workflow("distance-matrix.tsv"),
+        script="nusbaum/analyze.R"
+    shell: "cd nusbaum && ./analyze.R > results.txt"
