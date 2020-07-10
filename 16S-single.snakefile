@@ -12,7 +12,7 @@ rule single_denoise:
     params:
         trim_length = 150,
         min_reads = 1,
-        jobs_to_start = 2
+        jobs_to_start = 1
     shell:
         "qiime deblur denoise-16S"
         " --i-demultiplexed-seqs {input}"
