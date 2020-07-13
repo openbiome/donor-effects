@@ -37,7 +37,7 @@ long_data <- data %>%
   mutate(n_success = n_remission, n_fail = n_total - n_success) %>%
   mutate(outcome = map2(n_success, n_fail, ~ c(rep(1, .x), rep(0, .y)))) %>%
   select(donor, outcome) %>%
-  unnest(cols = c(outcome))
+  unnest()
 
 model <- glmer(outcome ~ (1 | donor), family = "binomial", data = long_data)
 
