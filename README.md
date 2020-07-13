@@ -17,14 +17,17 @@ Author: Scott Olesen <solesen@openbiome.org>
 - `kump/`: Re-analysis of Kump *et al*.
 - `moayyedi/`: Re-analysis of Moayyedi *et al*.
 - `nishida/`: Re-analysis of Nishida *et al*.
+- `nusbaum/`: Re-analysis of Nusbaum *et al*.
 - `paramsothy/`: Re-analysis of Paramsothy *et al*.
 - `pools/`: Analysis of the 3 "pool stool" studies
 - `rossen/`: Re-analysis of Rossen *et al*.
 - `utils.R`: Utilities for R scripts
+- `uygun/`: Re-analysis of Uygun *et al*.
+- `vaughn/`: Re-analysis of Vaughn *et al*.
 
-Goyal, Jacob, and Kump have subfolders `diversity-data/`, which are the
-workspaces for the 16S Snakefiles. The alpha- and beta-diversity results are
-placed there.
+Goyal, Jacob, Kump, and Nusbaum have subfolders `diversity-data/`, which are
+the workspaces for the 16S Snakefiles. The alpha- and beta-diversity results
+are placed there.
 
 ## Getting started
 
