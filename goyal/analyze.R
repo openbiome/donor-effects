@@ -80,4 +80,4 @@ plot <- alpha_plot + beta_plot +
   plot_layout(widths = c(1, 1.5)) +
   plot_annotation(tag_level = "a")
 
-ggsave("plot.pdf", width = 19, height = 10, units = "cm")
+ggsave("plot.pdf", width = 19, height = 10, units = "cm", useDingbats = FALSE)
